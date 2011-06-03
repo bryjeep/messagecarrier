@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler'
 
-Bundler.require
+Bundler.require(:default)
 
 require "./server"
 run Sinatra::Application
