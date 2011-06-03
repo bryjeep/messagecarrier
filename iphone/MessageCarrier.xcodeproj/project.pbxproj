@@ -125,6 +125,8 @@
 		17659FD813997FC8009DF548 /* MessageCarrier */ = {
 			isa = PBXGroup;
 			children = (
+				1765A0131399822F009DF548 /* NetworkManager.h */,
+				1765A0141399822F009DF548 /* NetworkManager.m */,
 				377180E313998A9F00A9305D /* Model.xcdatamodeld */,
 				377310DF1399957900FF5212 /* Message.h */,
 				377310E01399957900FF5212 /* Message.m */,
@@ -135,8 +137,6 @@
 				17659FE813997FC8009DF548 /* MessageCarrierViewController.m */,
 				17659FEA13997FC8009DF548 /* MessageCarrierViewController.xib */,
 				17659FD913997FC8009DF548 /* Supporting Files */,
-				1765A0131399822F009DF548 /* NetworkManager.h */,
-				1765A0141399822F009DF548 /* NetworkManager.m */,
 			);
 			path = MessageCarrier;
 			sourceTree = "<group>";
