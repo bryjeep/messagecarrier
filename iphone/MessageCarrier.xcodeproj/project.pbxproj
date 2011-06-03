@@ -24,6 +24,8 @@
 		1765A00213997FC9009DF548 /* MessageCarrierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1765A00113997FC9009DF548 /* MessageCarrierTests.m */; };
 		1765A0151399822F009DF548 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1765A0141399822F009DF548 /* NetworkManager.m */; };
 		1765A01B139985DB009DF548 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1765A01A139985DB009DF548 /* GameKit.framework */; };
+		377180E513998A9F00A9305D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 377180E313998A9F00A9305D /* Model.xcdatamodeld */; };
+		377310E11399957900FF5212 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 377310E01399957900FF5212 /* Message.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,9 @@
 		1765A0131399822F009DF548 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		1765A0141399822F009DF548 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		1765A01A139985DB009DF548 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		377180E413998A9F00A9305D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		377310DF1399957900FF5212 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		377310E01399957900FF5212 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +125,9 @@
 		17659FD813997FC8009DF548 /* MessageCarrier */ = {
 			isa = PBXGroup;
 			children = (
+				377180E313998A9F00A9305D /* Model.xcdatamodeld */,
+				377310DF1399957900FF5212 /* Message.h */,
+				377310E01399957900FF5212 /* Message.m */,
 				17659FE113997FC8009DF548 /* MessageCarrierAppDelegate.h */,
 				17659FE213997FC8009DF548 /* MessageCarrierAppDelegate.m */,
 				17659FE413997FC8009DF548 /* MainWindow.xib */,
@@ -273,6 +281,8 @@
 				17659FE313997FC8009DF548 /* MessageCarrierAppDelegate.m in Sources */,
 				17659FE913997FC8009DF548 /* MessageCarrierViewController.m in Sources */,
 				1765A0151399822F009DF548 /* NetworkManager.m in Sources */,
+				377180E513998A9F00A9305D /* Model.xcdatamodeld in Sources */,
+				377310E11399957900FF5212 /* Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +475,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		377180E313998A9F00A9305D /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				377180E413998A9F00A9305D /* Model.xcdatamodel */,
+			);
+			currentVersion = 377180E413998A9F00A9305D /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 17659FC513997FC8009DF548 /* Project object */;
 }
