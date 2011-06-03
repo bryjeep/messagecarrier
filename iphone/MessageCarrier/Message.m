@@ -16,5 +16,6 @@
 @dynamic MessageType;
 @dynamic Destination;
 @dynamic MessageBody;
+@dynamic Status;
 
 @end

@@ -1,10 +1,23 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    backports (2.2.1)
+    monkey-lib (0.5.4)
+      backports
     rack (1.2.2)
     sinatra (1.2.3)
       rack (~> 1.1)
       tilt (< 2.0, >= 1.2.2)
+    sinatra-advanced-routes (0.5.1)
+      monkey-lib (~> 0.5.0)
+      sinatra (~> 1.0)
+      sinatra-sugar (~> 0.5.0)
+    sinatra-reloader (0.5.0)
+      sinatra (~> 1.0)
+      sinatra-advanced-routes (~> 0.5.0)
+    sinatra-sugar (0.5.1)
+      monkey-lib (~> 0.5.0)
+      sinatra (~> 1.0)
     tilt (1.2.2)
 
 PLATFORMS
@@ -12,3 +25,4 @@ PLATFORMS
 
 DEPENDENCIES
   sinatra
+  sinatra-reloader

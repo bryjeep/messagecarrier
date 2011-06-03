@@ -19,5 +19,6 @@
 @property (nonatomic, retain) NSNumber * MessageType;
 @property (nonatomic, retain) NSString * Destination;
 @property (nonatomic, retain) NSString * MessageBody;
+@property (nonatomic, retain) NSNumber * Status;
 
 @end
