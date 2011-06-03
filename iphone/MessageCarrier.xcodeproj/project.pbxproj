@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		17659FD313997FC8009DF548 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17659FD213997FC8009DF548 /* UIKit.framework */; };
+		17659FD513997FC8009DF548 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17659FD413997FC8009DF548 /* Foundation.framework */; };
+		17659FD713997FC8009DF548 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17659FD613997FC8009DF548 /* CoreGraphics.framework */; };
+		17659FDD13997FC8009DF548 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17659FDB13997FC8009DF548 /* InfoPlist.strings */; };
+		17659FE013997FC8009DF548 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17659FDF13997FC8009DF548 /* main.m */; };
+		17659FE313997FC8009DF548 /* MessageCarrierAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17659FE213997FC8009DF548 /* MessageCarrierAppDelegate.m */; };
+		17659FE613997FC8009DF548 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17659FE413997FC8009DF548 /* MainWindow.xib */; };
+		17659FE913997FC8009DF548 /* MessageCarrierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17659FE813997FC8009DF548 /* MessageCarrierViewController.m */; };
+		17659FEC13997FC8009DF548 /* MessageCarrierViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17659FEA13997FC8009DF548 /* MessageCarrierViewController.xib */; };
+		17659FF313997FC8009DF548 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17659FD213997FC8009DF548 /* UIKit.framework */; };
+		17659FF413997FC8009DF548 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17659FD413997FC8009DF548 /* Foundation.framework */; };
+		17659FF513997FC8009DF548 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17659FD613997FC8009DF548 /* CoreGraphics.framework */; };
+		17659FFD13997FC8009DF548 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17659FFB13997FC8009DF548 /* InfoPlist.strings */; };
+		1765A00013997FC8009DF548 /* MessageCarrierTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 17659FFF13997FC8009DF548 /* MessageCarrierTests.h */; };
+		1765A00213997FC9009DF548 /* MessageCarrierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1765A00113997FC9009DF548 /* MessageCarrierTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		17659FF613997FC8009DF548 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17659FC513997FC8009DF548 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17659FCD13997FC8009DF548;
+			remoteInfo = MessageCarrier;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		17659FCE13997FC8009DF548 /* MessageCarrier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessageCarrier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17659FD213997FC8009DF548 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		17659FD413997FC8009DF548 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		17659FD613997FC8009DF548 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		17659FDA13997FC8009DF548 /* MessageCarrier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MessageCarrier-Info.plist"; sourceTree = "<group>"; };
+		17659FDC13997FC8009DF548 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		17659FDE13997FC8009DF548 /* MessageCarrier-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MessageCarrier-Prefix.pch"; sourceTree = "<group>"; };
+		17659FDF13997FC8009DF548 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		17659FE113997FC8009DF548 /* MessageCarrierAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCarrierAppDelegate.h; sourceTree = "<group>"; };
+		17659FE213997FC8009DF548 /* MessageCarrierAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCarrierAppDelegate.m; sourceTree = "<group>"; };
+		17659FE513997FC8009DF548 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		17659FE713997FC8009DF548 /* MessageCarrierViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCarrierViewController.h; sourceTree = "<group>"; };
+		17659FE813997FC8009DF548 /* MessageCarrierViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCarrierViewController.m; sourceTree = "<group>"; };
+		17659FEB13997FC8009DF548 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MessageCarrierViewController.xib; sourceTree = "<group>"; };
+		17659FF213997FC8009DF548 /* MessageCarrierTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MessageCarrierTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17659FFA13997FC8009DF548 /* MessageCarrierTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MessageCarrierTests-Info.plist"; sourceTree = "<group>"; };
+		17659FFC13997FC8009DF548 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		17659FFE13997FC8009DF548 /* MessageCarrierTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MessageCarrierTests-Prefix.pch"; sourceTree = "<group>"; };
+		17659FFF13997FC8009DF548 /* MessageCarrierTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCarrierTests.h; sourceTree = "<group>"; };
+		1765A00113997FC9009DF548 /* MessageCarrierTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCarrierTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		17659FCB13997FC8009DF548 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17659FD313997FC8009DF548 /* UIKit.framework in Frameworks */,
+				17659FD513997FC8009DF548 /* Foundation.framework in Frameworks */,
+				17659FD713997FC8009DF548 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17659FEE13997FC8009DF548 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17659FF313997FC8009DF548 /* UIKit.framework in Frameworks */,
+				17659FF413997FC8009DF548 /* Foundation.framework in Frameworks */,
+				17659FF513997FC8009DF548 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17659FC313997FC8009DF548 = {
+			isa = PBXGroup;
+			children = (
+				17659FD813997FC8009DF548 /* MessageCarrier */,
+				17659FF813997FC8009DF548 /* MessageCarrierTests */,
+				17659FD113997FC8009DF548 /* Frameworks */,
+				17659FCF13997FC8009DF548 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		17659FCF13997FC8009DF548 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17659FCE13997FC8009DF548 /* MessageCarrier.app */,
+				17659FF213997FC8009DF548 /* MessageCarrierTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		17659FD113997FC8009DF548 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				17659FD213997FC8009DF548 /* UIKit.framework */,
+				17659FD413997FC8009DF548 /* Foundation.framework */,
+				17659FD613997FC8009DF548 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		17659FD813997FC8009DF548 /* MessageCarrier */ = {
+			isa = PBXGroup;
+			children = (
+				17659FE113997FC8009DF548 /* MessageCarrierAppDelegate.h */,
+				17659FE213997FC8009DF548 /* MessageCarrierAppDelegate.m */,
+				17659FE413997FC8009DF548 /* MainWindow.xib */,
+				17659FE713997FC8009DF548 /* MessageCarrierViewController.h */,
+				17659FE813997FC8009DF548 /* MessageCarrierViewController.m */,
+				17659FEA13997FC8009DF548 /* MessageCarrierViewController.xib */,
+				17659FD913997FC8009DF548 /* Supporting Files */,
+			);
+			path = MessageCarrier;
+			sourceTree = "<group>";
+		};
+		17659FD913997FC8009DF548 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17659FDA13997FC8009DF548 /* MessageCarrier-Info.plist */,
+				17659FDB13997FC8009DF548 /* InfoPlist.strings */,
+				17659FDE13997FC8009DF548 /* MessageCarrier-Prefix.pch */,
+				17659FDF13997FC8009DF548 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		17659FF813997FC8009DF548 /* MessageCarrierTests */ = {
+			isa = PBXGroup;
+			children = (
+				17659FFF13997FC8009DF548 /* MessageCarrierTests.h */,
+				1765A00113997FC9009DF548 /* MessageCarrierTests.m */,
+				17659FF913997FC8009DF548 /* Supporting Files */,
+			);
+			path = MessageCarrierTests;
+			sourceTree = "<group>";
+		};
+		17659FF913997FC8009DF548 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17659FFA13997FC8009DF548 /* MessageCarrierTests-Info.plist */,
+				17659FFB13997FC8009DF548 /* InfoPlist.strings */,
+				17659FFE13997FC8009DF548 /* MessageCarrierTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		17659FCD13997FC8009DF548 /* MessageCarrier */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1765A00513997FC9009DF548 /* Build configuration list for PBXNativeTarget "MessageCarrier" */;
+			buildPhases = (
+				17659FCA13997FC8009DF548 /* Sources */,
+				17659FCB13997FC8009DF548 /* Frameworks */,
+				17659FCC13997FC8009DF548 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessageCarrier;
+			productName = MessageCarrier;
+			productReference = 17659FCE13997FC8009DF548 /* MessageCarrier.app */;
+			productType = "com.apple.product-type.application";
+		};
+		17659FF113997FC8009DF548 /* MessageCarrierTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1765A00813997FC9009DF548 /* Build configuration list for PBXNativeTarget "MessageCarrierTests" */;
+			buildPhases = (
+				17659FED13997FC8009DF548 /* Sources */,
+				17659FEE13997FC8009DF548 /* Frameworks */,
+				17659FEF13997FC8009DF548 /* Resources */,
+				17659FF013997FC8009DF548 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17659FF713997FC8009DF548 /* PBXTargetDependency */,
+			);
+			name = MessageCarrierTests;
+			productName = MessageCarrierTests;
+			productReference = 17659FF213997FC8009DF548 /* MessageCarrierTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		17659FC513997FC8009DF548 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 17659FC813997FC8009DF548 /* Build configuration list for PBXProject "MessageCarrier" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 17659FC313997FC8009DF548;
+			productRefGroup = 17659FCF13997FC8009DF548 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				17659FCD13997FC8009DF548 /* MessageCarrier */,
+				17659FF113997FC8009DF548 /* MessageCarrierTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		17659FCC13997FC8009DF548 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17659FDD13997FC8009DF548 /* InfoPlist.strings in Resources */,
+				17659FE613997FC8009DF548 /* MainWindow.xib in Resources */,
+				17659FEC13997FC8009DF548 /* MessageCarrierViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17659FEF13997FC8009DF548 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17659FFD13997FC8009DF548 /* InfoPlist.strings in Resources */,
+				1765A00013997FC8009DF548 /* MessageCarrierTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17659FF013997FC8009DF548 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		17659FCA13997FC8009DF548 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17659FE013997FC8009DF548 /* main.m in Sources */,
+				17659FE313997FC8009DF548 /* MessageCarrierAppDelegate.m in Sources */,
+				17659FE913997FC8009DF548 /* MessageCarrierViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17659FED13997FC8009DF548 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1765A00213997FC9009DF548 /* MessageCarrierTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17659FF713997FC8009DF548 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17659FCD13997FC8009DF548 /* MessageCarrier */;
+			targetProxy = 17659FF613997FC8009DF548 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		17659FDB13997FC8009DF548 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17659FDC13997FC8009DF548 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		17659FE413997FC8009DF548 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17659FE513997FC8009DF548 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		17659FEA13997FC8009DF548 /* MessageCarrierViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17659FEB13997FC8009DF548 /* en */,
+			);
+			name = MessageCarrierViewController.xib;
+			sourceTree = "<group>";
+		};
+		17659FFB13997FC8009DF548 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17659FFC13997FC8009DF548 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1765A00313997FC9009DF548 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1765A00413997FC9009DF548 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		1765A00613997FC9009DF548 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MessageCarrier/MessageCarrier-Prefix.pch";
+				INFOPLIST_FILE = "MessageCarrier/MessageCarrier-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1765A00713997FC9009DF548 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MessageCarrier/MessageCarrier-Prefix.pch";
+				INFOPLIST_FILE = "MessageCarrier/MessageCarrier-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1765A00913997FC9009DF548 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MessageCarrier.app/MessageCarrier";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MessageCarrierTests/MessageCarrierTests-Prefix.pch";
+				INFOPLIST_FILE = "MessageCarrierTests/MessageCarrierTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1765A00A13997FC9009DF548 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MessageCarrier.app/MessageCarrier";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MessageCarrierTests/MessageCarrierTests-Prefix.pch";
+				INFOPLIST_FILE = "MessageCarrierTests/MessageCarrierTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17659FC813997FC8009DF548 /* Build configuration list for PBXProject "MessageCarrier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1765A00313997FC9009DF548 /* Debug */,
+				1765A00413997FC9009DF548 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1765A00513997FC9009DF548 /* Build configuration list for PBXNativeTarget "MessageCarrier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1765A00613997FC9009DF548 /* Debug */,
+				1765A00713997FC9009DF548 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1765A00813997FC9009DF548 /* Build configuration list for PBXNativeTarget "MessageCarrierTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1765A00913997FC9009DF548 /* Debug */,
+				1765A00A13997FC9009DF548 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 17659FC513997FC8009DF548 /* Project object */;
+}
