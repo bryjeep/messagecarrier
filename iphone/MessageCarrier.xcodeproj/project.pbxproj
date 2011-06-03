@@ -24,6 +24,7 @@
 		1765A00213997FC9009DF548 /* MessageCarrierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1765A00113997FC9009DF548 /* MessageCarrierTests.m */; };
 		1765A0151399822F009DF548 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1765A0141399822F009DF548 /* NetworkManager.m */; };
 		1765A01B139985DB009DF548 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1765A01A139985DB009DF548 /* GameKit.framework */; };
+		17AC01F813999C1100ABADAC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC01F713999C1100ABADAC /* CoreData.framework */; };
 		377180E513998A9F00A9305D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 377180E313998A9F00A9305D /* Model.xcdatamodeld */; };
 		377310E11399957900FF5212 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 377310E01399957900FF5212 /* Message.m */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		1765A0131399822F009DF548 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		1765A0141399822F009DF548 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		1765A01A139985DB009DF548 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		17AC01F713999C1100ABADAC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		377180E413998A9F00A9305D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		377310DF1399957900FF5212 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		377310E01399957900FF5212 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17AC01F813999C1100ABADAC /* CoreData.framework in Frameworks */,
 				1765A01B139985DB009DF548 /* GameKit.framework in Frameworks */,
 				17659FD313997FC8009DF548 /* UIKit.framework in Frameworks */,
 				17659FD513997FC8009DF548 /* Foundation.framework in Frameworks */,
@@ -95,6 +98,7 @@
 		17659FC313997FC8009DF548 = {
 			isa = PBXGroup;
 			children = (
+				17AC01F713999C1100ABADAC /* CoreData.framework */,
 				1765A01A139985DB009DF548 /* GameKit.framework */,
 				17659FD813997FC8009DF548 /* MessageCarrier */,
 				17659FF813997FC8009DF548 /* MessageCarrierTests */,

@@ -12,16 +12,21 @@
 
 #define SESSION_ID @"MessageCarrier"
 
+@protocol NetworkManagerDelegate <NSObject>
+
+- (void) messageSent: (Message *) message;
+- (void) messageReceived: (Message *) message;
+@end
+
 @interface NetworkManager : NSObject <GKSessionDelegate> {
     
 }
 
+@property (nonatomic, retain) id <NetworkManagerDelegate> delegate;
 @property (nonatomic, retain) GKSession *currentSession;
 
-- (id) initWithMode: (GKSessionMode) mode;
-- (NSError *) startup;
 - (void) shutdown;
-- (BOOL) sendMessage: (Message *) message;
+- (NSError *) sendMessage: (Message *) message;
 - (NSArray *) localPeers;
 - (BOOL) peersNearby;
 @end

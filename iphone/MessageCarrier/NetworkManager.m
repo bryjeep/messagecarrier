@@ -11,18 +11,15 @@
 @implementation NetworkManager
 
 @synthesize currentSession;
+@synthesize delegate;
 
 - (id) init {
-    return [self initWithMode: GKSessionModePeer];
-}
-
-- (id) initWithMode: (GKSessionMode) mode {
     self = [super init];
     
     if (self) {
         self.currentSession = [[GKSession alloc] initWithSessionID: SESSION_ID
                                                        displayName: nil 
-                                                       sessionMode: mode];
+                                                       sessionMode: GKSessionModePeer];
     }
     
     return self;
@@ -33,8 +30,23 @@
 }
 
 #pragma mark - Action Methods
-- (BOOL)sendMessage:(Message *)message {
+- (NSError *) sendMessage: (Message *) message {
+    NSError *error;
+    NSData *data = nil;
     
+    [self.currentSession sendDataToAllPeers: data
+                               withDataMode: GKSendDataReliable
+                                      error: &error];
+    
+    return error;
+}
+
+- (NSArray *) localPeers {
+    return [self.currentSession peersWithConnectionState: GKSessionModePeer];
+}
+
+- (BOOL) peersNearby {
+    return [[self localPeers] count] > 0;
 }
 
 #pragma mark - GKSessionDelegate Methods
