@@ -22,6 +22,7 @@
 		17659FFD13997FC8009DF548 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17659FFB13997FC8009DF548 /* InfoPlist.strings */; };
 		1765A00013997FC8009DF548 /* MessageCarrierTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 17659FFF13997FC8009DF548 /* MessageCarrierTests.h */; };
 		1765A00213997FC9009DF548 /* MessageCarrierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1765A00113997FC9009DF548 /* MessageCarrierTests.m */; };
+		377180E513998A9F00A9305D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 377180E313998A9F00A9305D /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		17659FFE13997FC8009DF548 /* MessageCarrierTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MessageCarrierTests-Prefix.pch"; sourceTree = "<group>"; };
 		17659FFF13997FC8009DF548 /* MessageCarrierTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCarrierTests.h; sourceTree = "<group>"; };
 		1765A00113997FC9009DF548 /* MessageCarrierTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCarrierTests.m; sourceTree = "<group>"; };
+		377180E413998A9F00A9305D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		17659FD813997FC8009DF548 /* MessageCarrier */ = {
 			isa = PBXGroup;
 			children = (
+				377180E313998A9F00A9305D /* Model.xcdatamodeld */,
 				17659FE113997FC8009DF548 /* MessageCarrierAppDelegate.h */,
 				17659FE213997FC8009DF548 /* MessageCarrierAppDelegate.m */,
 				17659FE413997FC8009DF548 /* MainWindow.xib */,
@@ -263,6 +266,7 @@
 				17659FE013997FC8009DF548 /* main.m in Sources */,
 				17659FE313997FC8009DF548 /* MessageCarrierAppDelegate.m in Sources */,
 				17659FE913997FC8009DF548 /* MessageCarrierViewController.m in Sources */,
+				377180E513998A9F00A9305D /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +447,7 @@
 				1765A00713997FC9009DF548 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1765A00813997FC9009DF548 /* Build configuration list for PBXNativeTarget "MessageCarrierTests" */ = {
 			isa = XCConfigurationList;
@@ -451,8 +456,22 @@
 				1765A00A13997FC9009DF548 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		377180E313998A9F00A9305D /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				377180E413998A9F00A9305D /* Model.xcdatamodel */,
+			);
+			currentVersion = 377180E413998A9F00A9305D /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 17659FC513997FC8009DF548 /* Project object */;
 }
