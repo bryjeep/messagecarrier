@@ -74,9 +74,49 @@
     self.MessageField.delegate = self;
     self.MessageField.placeholder = @"enter your message";
     
-    self.sentCnt.text = [[NSNumber numberWithInt:0] stringValue];
-    self.deliveredCnt.text = [[NSNumber numberWithInt:0] stringValue];
-    self.carriedCnt.text = [[NSNumber numberWithInt:0] stringValue];
+    //load from db
+    NSManagedObjectContext *context = [MessageCarrierAppDelegate sharedMessageCarrierAppDelegate].managedObjectContext;
+    NSFetchRequest *request = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate]createFetchRequestForMessage];
+    
+    NSError *err;
+    NSUInteger totalRecords = [context countForFetchRequest:request error:&err];
+    if(totalRecords == NSNotFound) {
+        //Handle error
+        totalRecords = 0;
+        carriedNbr = 0;
+    } 
+    
+    NSPredicate *myMessagesPredicate = [NSPredicate
+                              predicateWithFormat:@"(SourceID == %@)",
+                              [[UIDevice currentDevice] uniqueIdentifier]];
+    [request setPredicate:myMessagesPredicate];
+    NSUInteger count = [context countForFetchRequest:request error:&err];
+    if(count == NSNotFound) {
+        //Handle error
+        sentNbr = 0;
+    } else {
+        sentNbr = count;
+        carriedNbr = totalRecords - sentNbr;
+    }
+    
+
+
+    NSPredicate *deliveredPredicate = [NSPredicate
+                                        predicateWithFormat:@"(Status == %@)",
+                                        [NSNumber numberWithInt:SENT]];
+    [request setPredicate:deliveredPredicate];
+    count = [context countForFetchRequest:request error:&err];
+    if(count == NSNotFound) {
+        //Handle error
+        deliveredNbr = 0;
+    } else {
+        deliveredNbr = count;
+    }
+    [request release];
+    
+    self.sentCnt.text = [[NSNumber numberWithInt:sentNbr] stringValue];
+    self.deliveredCnt.text = [[NSNumber numberWithInt:deliveredNbr] stringValue];
+    self.carriedCnt.text = [[NSNumber numberWithInt:carriedNbr] stringValue];
     
     UIImage *buttonImageNormal = [UIImage imageNamed:@"action-normal.png"];
     UIImage *stretchableButtonImageNormal = [buttonImageNormal stretchableImageWithLeftCapWidth:12 topCapHeight:0];
@@ -127,17 +167,21 @@
 
 - (void) networkManager: (NetworkManager *) networkManager receivedMessage: (OutOfBandMessage *) message wasAccepted: (BOOL) accepted {
     NSLog(@"receivedMessage");
+    if (accepted) {
+        carriedNbr++;
+        self.carriedCnt.text = [[NSNumber numberWithInt:carriedNbr] stringValue];
+    }
 }
 
-- (void) networkManagerDiscoveredPeer: (NetworkManager *) networkManager {
+- (void) networkManagerDiscoveredPeer: (NetworkManager *) nm {
     NSLog(@"discoveredPeer");
 }
-- (void) networkManagerConnectedPeer: (NetworkManager *) networkManager {
-    [self setConnectionCount:[networkManager currentPeerCount]];
+- (void) networkManagerConnectedPeer: (NetworkManager *) nm {
+    [self setConnectionCount:[nm currentPeerCount]];
     NSLog(@"addedPeer");
 }
-- (void) networkManagerDisconnectedPeer: (NetworkManager *) networkManager {
-    [self setConnectionCount:[networkManager currentPeerCount]];
+- (void) networkManagerDisconnectedPeer: (NetworkManager *) nm {
+    [self setConnectionCount:[nm currentPeerCount]];
     NSLog(@"removedPeer");
 }
 
@@ -204,6 +248,9 @@
         self.message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
         self.toField.text = @"";
         self.MessageField.text = @"";
+        sentNbr++;
+        self.sentCnt.text = [[NSNumber numberWithInt:sentNbr] stringValue];
+        
     }else{
         NSLog(@"Error Creating Message");
     }
