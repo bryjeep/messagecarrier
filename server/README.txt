@@ -1,5 +1,5 @@
-
-GETTING SETUP
+# Message Carrier Server
+## GETTING SETUP
 
 * Install RVM
   http://rvm.beginrescueend.com/
@@ -9,7 +9,7 @@ GETTING SETUP
 * gem install bundler
 * bundle install
 
-RUNNING DEV SERVER
+### RUNNING DEV SERVER
 
 * bundle exec rackup
 
