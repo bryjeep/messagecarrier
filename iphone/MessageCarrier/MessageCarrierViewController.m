@@ -34,7 +34,7 @@
 }
 
 - (void) networkManager: (NetworkManager *) networkManager sentMessage: (OutOfBandMessage *) message {
-    NSLog(@"sentMessage");
+    NSLog(@"XXX sentMessage");
 }
 
 - (void) networkManager: (NetworkManager *) networkManager receivedMessage: (OutOfBandMessage *) message wasAccepted: (BOOL) accepted {
@@ -43,6 +43,8 @@
 
 - (void) networkManagerDiscoveredPeers: (NetworkManager *) networkManager {
     NSLog(@"discoveredPeers");
+    
+    [self.networkManager sendMessage: nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -53,9 +55,9 @@
     
     [self.networkManager startup];
     
-    GKPeerPickerController *picker = [[GKPeerPickerController alloc] init];
-    picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
-    [picker show];    
+//    GKPeerPickerController *picker = [[GKPeerPickerController alloc] init];
+//    picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
+//    [picker show];    
 }
 
 - (void)viewDidUnload

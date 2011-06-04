@@ -10,18 +10,18 @@
 #import <GameKit/GameKit.h>
 #import "OutOfBandMessage.h"
 
-#define SESSION_ID @"MessageCarrier"
-#define MESSAGE_ID @"MESSAGE_ID"
-#define HOP_COUNT @"HOP_COUNT"
-#define SOURCE_ID @"SOURCE_ID"
-#define MESSAGE_TYPE @"MESSAGE_TYPE"
-#define DESTINATION @"DESTINATION"
-#define MESSAGE_BODY @"MESSAGE_BODY"
-#define STATUS @"STATUS"
-#define MESSAGE_WAS_ACCEPTED @"MESSAGE_WAS_ACCEPTED"
-#define SENDER_NAME @"SENDER_NAME"
-#define DATE_TIME @"DATE_TIME"
-#define LOCATION @"LOCATION"
+#define kSESSION_ID @"MessageCarrier"
+#define kMESSAGE_ID @"MESSAGE_ID"
+#define kHOP_COUNT @"HOP_COUNT"
+#define kSOURCE_ID @"SOURCE_ID"
+#define kMESSAGE_TYPE @"MESSAGE_TYPE"
+#define kDESTINATION @"DESTINATION"
+#define kMESSAGE_BODY @"MESSAGE_BODY"
+#define kSTATUS @"STATUS"
+#define kMESSAGE_WAS_ACCEPTED @"MESSAGE_WAS_ACCEPTED"
+#define kSENDER_NAME @"SENDER_NAME"
+#define kDATE_TIME @"DATE_TIME"
+#define kLOCATION @"LOCATION"
 
 @class NetworkManager;
 
@@ -40,6 +40,7 @@
 
 - (BOOL) startup;
 - (void) shutdown;
+- (NSError *) sendMessage: (OutOfBandMessage *) message;
 - (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted;
 - (BOOL) peersNearby;
 @end

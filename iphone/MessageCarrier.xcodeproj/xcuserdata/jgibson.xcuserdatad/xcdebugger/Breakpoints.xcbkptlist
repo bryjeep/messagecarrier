@@ -9,12 +9,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "MessageCarrier/NetworkManager.m"
-         timestampString = "328847807.202032"
+         timestampString = "328852539.104162"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
-         landmarkName = "-checkForPeers"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
+         landmarkName = "-receiveData:fromPeer:inSession:context:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -23,12 +23,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "MessageCarrier/NetworkManager.m"
-         timestampString = "328848356.144176"
+         timestampString = "328852946.654455"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
-         landmarkName = "-bluetoothAvailabilityChanged:"
+         startingLineNumber = "158"
+         endingLineNumber = "158"
+         landmarkName = "-sendMessage:asAccepted:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -37,12 +37,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "MessageCarrier/NetworkManager.m"
-         timestampString = "328849618.011244"
+         timestampString = "328852968.538141"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
-         landmarkName = "-startup"
+         startingLineNumber = "182"
+         endingLineNumber = "182"
+         landmarkName = "-peersNearby"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "MessageCarrier/NetworkManager.m"
+         timestampString = "328853051.970015"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
+         landmarkName = "-sendMessage:asAccepted:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

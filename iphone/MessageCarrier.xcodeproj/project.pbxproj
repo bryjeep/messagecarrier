@@ -24,7 +24,6 @@
 		1765A00213997FC9009DF548 /* MessageCarrierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1765A00113997FC9009DF548 /* MessageCarrierTests.m */; };
 		1765A0151399822F009DF548 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1765A0141399822F009DF548 /* NetworkManager.m */; };
 		1765A01B139985DB009DF548 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1765A01A139985DB009DF548 /* GameKit.framework */; };
-		179717DD1399CFFE00A5D3CA /* OutOfBandMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 179717DC1399CFFE00A5D3CA /* OutOfBandMessage.m */; };
 		179717E01399D37800A5D3CA /* MessageCarrierAppDelegate+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 179717DF1399D37800A5D3CA /* MessageCarrierAppDelegate+Application.m */; };
 		17AC01F813999C1100ABADAC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC01F713999C1100ABADAC /* CoreData.framework */; };
 		377180E513998A9F00A9305D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 377180E313998A9F00A9305D /* Model.xcdatamodeld */; };
@@ -81,8 +80,6 @@
 		1765A0131399822F009DF548 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		1765A0141399822F009DF548 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		1765A01A139985DB009DF548 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		179717DB1399CFFE00A5D3CA /* OutOfBandMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutOfBandMessage.h; sourceTree = "<group>"; };
-		179717DC1399CFFE00A5D3CA /* OutOfBandMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutOfBandMessage.m; sourceTree = "<group>"; };
 		179717DE1399D37800A5D3CA /* MessageCarrierAppDelegate+Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MessageCarrierAppDelegate+Application.h"; sourceTree = "<group>"; };
 		179717DF1399D37800A5D3CA /* MessageCarrierAppDelegate+Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MessageCarrierAppDelegate+Application.m"; sourceTree = "<group>"; };
 		17AC01F713999C1100ABADAC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -93,7 +90,7 @@
 		3785D8361399AC4400201B8D /* MessageCarrierAppDelegate+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MessageCarrierAppDelegate+Utility.m"; sourceTree = "<group>"; };
 		3785D8411399B4A300201B8D /* ServerInterfaceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerInterfaceManager.h; sourceTree = "<group>"; };
 		3785D8421399B4A300201B8D /* ServerInterfaceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerInterfaceManager.m; sourceTree = "<group>"; };
-		37D8B66E1399BC5100B3D0F5 /* OutOfBandMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; path = OutOfBandMessage.h; sourceTree = "<group>"; };
+		37D8B66E1399BC5100B3D0F5 /* OutOfBandMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutOfBandMessage.h; sourceTree = "<group>"; };
 		37D8B66F1399BC5100B3D0F5 /* OutOfBandMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutOfBandMessage.m; sourceTree = "<group>"; };
 		37D8B6741399C38500B3D0F5 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		37D8B6751399C38500B3D0F5 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -185,8 +182,6 @@
 		17659FD813997FC8009DF548 /* MessageCarrier */ = {
 			isa = PBXGroup;
 			children = (
-				179717DB1399CFFE00A5D3CA /* OutOfBandMessage.h */,
-				179717DC1399CFFE00A5D3CA /* OutOfBandMessage.m */,
 				37D8B6731399C38500B3D0F5 /* JSON */,
 				1765A0131399822F009DF548 /* NetworkManager.h */,
 				1765A0141399822F009DF548 /* NetworkManager.m */,
@@ -390,7 +385,6 @@
 				377180E513998A9F00A9305D /* Model.xcdatamodeld in Sources */,
 				3785D82B1399A2FE00201B8D /* MessageCarrierAppDelegate+DataModel.m in Sources */,
 				3785D8371399AC4400201B8D /* MessageCarrierAppDelegate+Utility.m in Sources */,
-				179717DD1399CFFE00A5D3CA /* OutOfBandMessage.m in Sources */,
 				179717E01399D37800A5D3CA /* MessageCarrierAppDelegate+Application.m in Sources */,
 				3785D8431399B4A300201B8D /* ServerInterfaceManager.m in Sources */,
 				37D8B6701399BC5100B3D0F5 /* OutOfBandMessage.m in Sources */,
