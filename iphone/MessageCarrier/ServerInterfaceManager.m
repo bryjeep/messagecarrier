@@ -20,19 +20,29 @@
                                                       timeoutInterval:60.0];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: [[[message dictionaryRepresentation] JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-	NSManagedObjectContext* managedContext = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext];
 	
     [MessageCarrierAppDelegate asyncRequest:request
                                     success:^(NSData * data, NSURLResponse * response){
                                         //Message got sent
-                                        [managedContext lock];
-                                        message.Status = [NSNumber numberWithUnsignedInt: SENT];
-                                        [managedContext unlock];
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            NSError* error;
+                                            message.Status = [NSNumber numberWithUnsignedInt: SENT];
+                                            if(![[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext] save:&error]){
+                                                NSLog(@"Success Save Error %@",error);
+                                            }
+                                            
+                                        });
                                     }
                                     failure:^(NSData * data, NSError * response){
                                         //Message got sent
-                                        message.Status = [NSNumber numberWithUnsignedInt: FAILED];
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            NSError* error;
+                                            message.Status = [NSNumber numberWithUnsignedInt: FAILED];
+                                            if(![[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext] save:&error]){
+                                                NSLog(@"Failed Save Error %@",error);
+                                            }
+                                            
+                                        });
                                     }];
 }
 

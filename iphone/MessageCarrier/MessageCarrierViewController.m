@@ -9,13 +9,17 @@
 #import "MessageCarrierViewController.h"
 #import "UITextViewWithPlaceholder.h"
 
+#import "MessageCarrierAppDelegate+DataModel.h"
+#import "MessageCarrierAppDelegate+Utility.h"
+
 @implementation MessageCarrierViewController
 @synthesize charCounter;
 @synthesize chooseContact;
 @synthesize MessageField, sentCnt, deliveredCnt, carriedCnt, sendMessageBtn, toField, messageType;
+@synthesize connectionLabel;
 
 @synthesize networkManager;
-@synthesize connectionLabel;
+@synthesize message;
 
 - (void)dealloc
 {
@@ -30,6 +34,15 @@
     [self.sendMessageBtn dealloc];
     [self.toField dealloc];
     [self.messageType dealloc];
+}
+
+- (id) init {
+    self = [super init];
+    
+    if (self) {
+        self.message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
+    }
+    return self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,14 +129,17 @@
     NSLog(@"receivedMessage");
 }
 
-
-- (void) networkManagerDiscoveredPeers: (NetworkManager *) networkManager {
-    NSLog(@"discoveredPeers");
-    
-    [self.networkManager sendMessage: nil];
-    [self setConnectionCount:1];
-
+- (void) networkManagerDiscoveredPeer: (NetworkManager *) networkManager {
+    NSLog(@"discoveredPeer");
 }
+- (void) networkManagerConnectedPeer: (NetworkManager *) networkManager {
+    [self setConnectionCount:1];
+    NSLog(@"addedPeer");
+}
+- (void) networkManagerDisconnectedPeer: (NetworkManager *) networkManager {
+    NSLog(@"removedPeer");
+}
+
 - (void)setConnectionCount:(NSUInteger) cnt{ 
     self.connectionLabel.text = [NSString stringWithFormat:@"%d Nearby Message Carrier%@", cnt, cnt != 1 ? @"s" : @""];
 }
@@ -163,10 +179,37 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)SendMessageClicked:(id)sender {
+- (IBAction)SendMessageClicked:(id)sender
+{	
+    NSManagedObjectContext* managedObjectContext = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext];
+	NSError *error = nil;
+	
+    self.message.Status         = [NSNumber numberWithInt: UNSENT];
+
+    self.message.SourceID       = [[UIDevice currentDevice] uniqueIdentifier];
+    self.message.Destination    = self.toField.text;
+    self.message.MessageID      = [MessageCarrierAppDelegate createUUID];
+    self.message.HopCount       = [NSNumber numberWithInt: 0];
+    self.message.Location       = @"Unknown";
+    self.message.TimeStamp      = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+    
+    self.message.MessageType    = [NSNumber numberWithInt: [self.messageType selectedSegmentIndex]];
+    self.message.SenderName     = @"Somebody";
+    self.message.MessageBody    = self.MessageField.text;
+    
+	if ([managedObjectContext save: &error]){
+        [self.networkManager sendMessage:self.message];
+        
+        self.message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
+        self.toField.text = @"";
+        self.MessageField.text = @"";
+    }else{
+        NSLog(@"Error Creating Message");
+    }
 }
 
-- (IBAction)MessageTypeChanged:(id)sender {
+- (IBAction)MessageTypeChanged:(id)sender
+{
     switch (self.messageType.selectedSegmentIndex) {
         case 0:
             self.toField.enabled =YES;

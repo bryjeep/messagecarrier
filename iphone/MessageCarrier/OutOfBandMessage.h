@@ -29,16 +29,21 @@ typedef enum
 @private
 }
 @property (nonatomic, retain) NSNumber * Status;
-@property (nonatomic, retain) NSString * MessageBody;
-@property (nonatomic, retain) NSString * Destination;
-@property (nonatomic, retain) NSNumber * HopCount;
+
 @property (nonatomic, retain) NSString * SourceID;
 @property (nonatomic, retain) NSString * MessageID;
+@property (nonatomic, retain) NSString * Destination;
+@property (nonatomic, retain) NSNumber * HopCount;
+@property (nonatomic, retain) NSString * Location;
+@property (nonatomic, retain) NSNumber * TimeStamp;
+
 @property (nonatomic, retain) NSNumber * MessageType;
 @property (nonatomic, retain) NSString * SenderName;
-@property (nonatomic, retain) NSString * Location;
-@property (nonatomic, retain) NSString * TimeStamp;
+@property (nonatomic, retain) NSString * MessageBody;
+
 
 -(NSMutableDictionary *)dictionaryRepresentation;
+-(void)setWithDictionaryRepresentation:(NSDictionary*)dictionary;
 
+-(NSString*)string;
 @end

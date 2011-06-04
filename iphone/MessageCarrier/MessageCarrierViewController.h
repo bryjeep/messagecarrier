@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NetworkManager.h"
 #import "UITextViewWithPlaceholder.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UITextViewWithPlaceholder.h"
 #import <AddressBook/AddressBook.h>
 #import <CoreFoundation/CoreFoundation.h>
 #import <AddressBookUI/AddressBookUI.h>
+
+#import "NetworkManager.h"
+#import "OutOfBandMessage.h"
 
 @interface MessageCarrierViewController : UIViewController<UITextViewDelegate,NetworkManagerDelegate, ABPeoplePickerNavigationControllerDelegate> {
 	UITextViewWithPlaceholder *MessageField;
@@ -26,6 +28,9 @@
     UITextField *toField;
     UILabel *charCounter;
     UILabel *connectionLabel;
+
+    NetworkManager *networkManager;
+    OutOfBandMessage *message;
 }
 @property (nonatomic, retain) IBOutlet UILabel *charCounter;
 
@@ -37,8 +42,10 @@
 @property (nonatomic, retain) IBOutlet UIButton *chooseContact;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *messageType;
 @property (nonatomic, retain) IBOutlet UITextField *toField;
-@property (nonatomic, retain) NetworkManager *networkManager;
 @property (nonatomic, retain) IBOutlet UILabel *connectionLabel;
+
+@property (nonatomic, retain) NetworkManager *networkManager;
+@property (nonatomic, retain) OutOfBandMessage* message;
 
 - (IBAction)choseContactTouch:(id)sender;
 -(void)sendMessage;

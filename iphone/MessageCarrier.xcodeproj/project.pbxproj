@@ -214,11 +214,9 @@
 				37D8B66E1399BC5100B3D0F5 /* OutOfBandMessage.h */,
 				37D8B66F1399BC5100B3D0F5 /* OutOfBandMessage.m */,
 				17659FE113997FC8009DF548 /* MessageCarrierAppDelegate.h */,
+				17659FE213997FC8009DF548 /* MessageCarrierAppDelegate.m */,
 				179717DE1399D37800A5D3CA /* MessageCarrierAppDelegate+Application.h */,
 				179717DF1399D37800A5D3CA /* MessageCarrierAppDelegate+Application.m */,
-				17659FE213997FC8009DF548 /* MessageCarrierAppDelegate.m */,
-				37D8B7061399CD2B00B3D0F5 /* MessageCarrierAppDelegate+Application.h */,
-				37D8B7071399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m */,
 				3785D8291399A2FD00201B8D /* MessageCarrierAppDelegate+DataModel.h */,
 				3785D82A1399A2FD00201B8D /* MessageCarrierAppDelegate+DataModel.m */,
 				3785D8351399AC4400201B8D /* MessageCarrierAppDelegate+Utility.h */,
@@ -449,7 +447,6 @@
 				37D8B6971399C38500B3D0F5 /* SBJsonTokeniser.m in Sources */,
 				37D8B6981399C38500B3D0F5 /* SBJsonUTF8Stream.m in Sources */,
 				37D8B6991399C38500B3D0F5 /* SBJsonWriter.m in Sources */,
-				37D8B7081399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m in Sources */,
 				6CED60FD1399E13B00103320 /* UITextViewWithPlaceholder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
