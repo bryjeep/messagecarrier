@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "MessageCarrierAppDelegate.h"
+#import "Reachability.h"
 
 @interface MessageCarrierAppDelegate ( Application )
 
@@ -19,7 +20,7 @@
 //   You can put properties in this file if you define the getter and setter manually.
 //   You should put the instance variables and sythesized properties definition in MessageCarrierAppDelegate.h
 //   You should @synthesize the properties in MessageCarrierAppDelegate.m
-
+@property (nonatomic, retain) Reachability *reach;
 
 +(NSString *)applicationDocumentsDirectory;
 @end

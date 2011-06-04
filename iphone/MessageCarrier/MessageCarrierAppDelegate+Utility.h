@@ -7,6 +7,7 @@
 //
 
 #import "MessageCarrierAppDelegate.h"
+#import "Reachability.h"
 
 @interface MessageCarrierAppDelegate ( Utilty )
 
@@ -20,5 +21,6 @@
 
 + (NSString *)createUUID;
 + (void)asyncRequest:(NSURLRequest *)request success:(void(^)(NSData *,NSURLResponse *))successBlock failure:(void(^)(NSData *,NSError *))failureBlock;
+- (void) reachabilityChanged: (NSNotification* )note;
 
 @end

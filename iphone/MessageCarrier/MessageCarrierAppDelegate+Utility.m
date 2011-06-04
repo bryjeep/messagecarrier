@@ -32,7 +32,27 @@
     
     return uuidStr;
 }
-
+//Called by Reachability whenever status changes.
+- (void) reachabilityChanged: (NSNotification* )note
+{
+	Reachability* curReach = [note object];
+	NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    if([curReach currentReachabilityStatus] == NotReachable)
+        return;
+        
+    NSManagedObjectContext *context = self.managedObjectContext;
+    NSFetchRequest *request = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate]createFetchRequestForMessage];
+    
+    NSError *err;
+    NSPredicate *toDeliver = [NSPredicate
+                                       predicateWithFormat:@"(Status == %@)",
+                                       [NSNumber numberWithInt:UNSENT]];
+    [request setPredicate:toDeliver];
+    NSArray *results = [context executeFetchRequest:request error:&err];
+    
+    //TODO: build request and pass to asyncRequest method
+    
+}
 + (void)asyncRequest:(NSURLRequest *)request success:(void(^)(NSData *,NSURLResponse *))successBlock failure:(void(^)(NSData *,NSError *))failureBlock
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
