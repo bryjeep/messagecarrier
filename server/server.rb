@@ -66,9 +66,9 @@ end
 
 helpers do
   def format_text(msg)
-    "Emergency msg from #{msg['sendername']}: #{msg['messagebody']}"
+    "Emergency msg: #{msg['messagebody']}"
   end
-
+  
   def send_sms(msg)
     t = {
       'From' => CALLER_ID,
@@ -97,7 +97,7 @@ helpers do
     smtp_user   = 'messagecarrier'
     smtp_pwd    = 'rh0kATL'
     
-    subject = "[MessageCarrier] Emergency Message from #{msg['sendername']}"
+    subject = "[MessageCarrier] Emergency Message"
     time = Time.now
     emaildate = time.strftime("%a, %d %b %Y %H:%M:%S -0400")
     
@@ -108,7 +108,7 @@ From: #{from}
 To: #{to}
 Subject: #{subject}
 
-You have received a message from #{msg['sendername']} from an
+You have received a message from an
 area experiencing a communications emergency:
 
   #{msg['messagebody']}
@@ -122,8 +122,9 @@ END_OF_MESSAGE
   end
 
   def send_twitter(msg)
-    # Twitter.update("Now tweeting with location!", {"status" => "Now with Geo Location Support!", "lat" => "33.778463", "long" => "-84.398881", "display_coordinates" => "true"})
-    Twitter.update(format_text(msg))
+    latlong = msg['location'].split(',')
+    Twitter.update(msg['messagebody'], {"lat" => latlong[0], "long" => latlong[1], "display_coordinates" => "true"})
+    #Twitter.update(format_text(msg))
   end
 
 end
