@@ -70,7 +70,7 @@
 }
 
 - (int)currentPeerCount {
-    return [self.currentSession peersWithConnectionState:GKPeerStateConnected];
+    return [[self.currentSession peersWithConnectionState: GKPeerStateConnected] count];
 }
 #pragma mark
 
