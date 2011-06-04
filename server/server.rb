@@ -4,24 +4,29 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require './database'
 
+require 'builder'
 require 'twiliolib'
 require 'yajl'
 
 API_VERSION = '2010-04-01'
 ACCOUNT_SID = 'AC811c26b1ded5a7246241880f9ec98334'
 ACCOUNT_TOKEN = 'cef36b0b4a8d4eb7429178443bb3a6d0'
-CALLER_ID = '+14043850750';
-account = Twilio::RestAccount.new(ACCOUNT_SID, ACCOUNT_TOKEN)
+CALLER_ID = '+14155992671' #'+14043850750'
 
 get "/" do
   t = {
     'From' => CALLER_ID,
-    'To' => "404-909-1495",			
+    'To' => "4043850750",			
     'Body' => "Hello Me..."
   }
-  resp = account.request("/#{API_VERSION}/Accounts/#{ACCOUNT_SID}/SMS/Messages",
+  begin
+    account = Twilio::RestAccount.new(ACCOUNT_SID, ACCOUNT_TOKEN)
+    resp = account.request("/#{API_VERSION}/Accounts/#{ACCOUNT_SID}/SMS/Messages",
              'POST',
              t)
+  ensure
+    puts "Twilio Response: " + resp.body
+  end
   resp.error! unless resp.kind_of? Net::HTTPSuccess
   puts "code: %s\nbody: %s" % [resp.code, resp.body]
   
