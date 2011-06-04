@@ -51,19 +51,31 @@
         [self.delegate networkManagerDiscoveredPeers: self];
     }
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval: 10.0
-                                                  target: self
-                                                selector: @selector(checkForPeers)
-                                                userInfo: nil
-                                                 repeats: YES];
+    if (!self.timer) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval: 10.0
+                                                      target: self
+                                                    selector: @selector(checkForPeers)
+                                                    userInfo: nil
+                                                     repeats: YES];
+    }
 }
 
 - (BOOL) startup {
     self.currentSession.available = YES;
     
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(bluetoothAvailabilityChanged:)
+     name:@"BluetoothAvailabilityChangedNotification"
+     object:nil];
+    
     [self checkForPeers];
     
     return YES;
+}
+
+- (void)bluetoothAvailabilityChanged:(NSNotification *)notification {
+    NSLog(@"BT NOT: %@", notification);
 }
 
 - (void)shutdown {
@@ -151,6 +163,8 @@
     
     NSArray *localPeers = [self localPeers];
 
+    NSLog(@"Peers: %@", localPeers);
+    
     if (![self.peers isEqualToArray: localPeers]) {
         self.peers = localPeers;
         
