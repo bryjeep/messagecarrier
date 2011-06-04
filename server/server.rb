@@ -51,37 +51,12 @@ post "/messages" do
           end
           statuses[msg['messageid']] = :accepted
         else
+          puts "DB error"
           statuses[msg['messageid']] = :error
         end
       end
-      
-	  from = 'messagecarrier@lavabit.com'
-	  to = msg['destination']
-	  smtp_host   = 'lavabit.com'
-	  smtp_port   = 25
-	  smtp_domain = 'lavabit.com'
-	  smtp_user   = 'messagecarrier'
-	  smtp_pwd    = 'rh0kATL'
-	  
-	  subject = '[MessageCarrier] Test Email'
-	  emailbody = msg['messagebody']
-	  time = Time.now
-	  emaildate = time.strftime("%a, %d %b %Y %H:%M:%S -0400")
-
-emailmsg = <<END_OF_MESSAGE
-Date: #{emaildate}
-From: #{from}
-To: #{to}
-Subject: #{subject}
-
-#{emailbody}
-END_OF_MESSAGE
-
-Net::SMTP.start(smtp_host, smtp_port, smtp_domain, smtp_user, smtp_pwd, :plain) do |smtp|
-smtp.send_message emailmsg, from, to
-end
-      
     rescue Exception => e
+      puts e.inspect
       statuses[msg['messageid']] = :error
     end
   end
