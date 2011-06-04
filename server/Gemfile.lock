@@ -1,12 +1,26 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.2.6)
     backports (2.2.1)
     builder (3.0.0)
+    faraday (0.6.1)
+      addressable (~> 2.2.4)
+      multipart-post (~> 1.1.0)
+      rack (>= 1.1.0, < 2)
+    faraday_middleware (0.6.3)
+      faraday (~> 0.6.0)
+    hashie (1.0.0)
     monkey-lib (0.5.4)
       backports
+    multi_json (1.0.3)
+    multi_xml (0.2.2)
+    multipart-post (1.1.2)
     rack (1.2.2)
+    rash (0.3.0)
+      hashie (~> 1.0.0)
     sequel (3.24.1)
+    simple_oauth (0.1.5)
     sinatra (1.2.3)
       rack (~> 1.1)
       tilt (< 2.0, >= 1.2.2)
@@ -27,6 +41,14 @@ GEM
     tilt (1.2.2)
     twiliolib (2.0.7)
       builder (>= 2.1.2)
+    twitter (1.5.0)
+      faraday (~> 0.6.1)
+      faraday_middleware (~> 0.6.3)
+      hashie (~> 1.0.0)
+      multi_json (~> 1.0.0)
+      multi_xml (~> 0.2.0)
+      rash (~> 0.3.0)
+      simple_oauth (~> 0.1.5)
     yajl-ruby (0.8.2)
 
 PLATFORMS
@@ -39,4 +61,5 @@ DEPENDENCIES
   sinatra-sequel
   sqlite3
   twiliolib
+  twitter
   yajl-ruby

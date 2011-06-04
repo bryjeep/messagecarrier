@@ -1,3 +1,4 @@
+
 //
 //  OutOfBandMessage.m
 //  MessageCarrier
@@ -26,18 +27,20 @@
 
 
 -(NSMutableDictionary *)dictionaryRepresentation {
-	
+    
 	NSMutableDictionary *dict = [[[NSMutableDictionary alloc] initWithCapacity:50] autorelease];
     
-    [dict setObject: self.SourceID          forKey: @"sourceid"];
-    [dict setObject: self.MessageID         forKey: @"messageid"];
-	[dict setObject: self.Destination       forKey: @"destination"];
-    [dict setObject: self.HopCount          forKey: @"hopcount"];
-    [dict setObject: self.Location          forKey: @"location"];
-	[dict setObject: self.TimeStamp         forKey: @"timestamp"];
-    [dict setObject: self.MessageType       forKey: @"messagetype"];
-    [dict setObject: self.SenderName        forKey: @"sendername"];
-	[dict setObject: self.MessageBody       forKey: @"messagebody"];
+    if (self.SourceID && self.MessageID && self.Destination && self.HopCount && self.Location && self.TimeStamp && self.MessageType && self.SenderName && self.MessageBody) {
+        [dict setObject: self.SourceID          forKey: @"sourceid"];
+        [dict setObject: self.MessageID         forKey: @"messageid"];
+        [dict setObject: self.Destination       forKey: @"destination"];
+        [dict setObject: self.HopCount          forKey: @"hopcount"];
+        [dict setObject: self.Location          forKey: @"location"];
+        [dict setObject: self.TimeStamp         forKey: @"timestamp"];
+        [dict setObject: self.MessageType       forKey: @"messagetype"];
+        [dict setObject: self.SenderName        forKey: @"sendername"];
+        [dict setObject: self.MessageBody       forKey: @"messagebody"];
+    }
     
 	return dict;
 }

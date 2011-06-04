@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 #import "MessageCarrierViewController.h"
+#import "Reachability.h"
 
 @class MessageCarrierViewController;
 
@@ -18,6 +19,7 @@
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	NSManagedObjectModel	*managedObjectModel;
 	NSManagedObjectContext	*managedObjectContext;
+    Reachability *reach;
 }
 
 #pragma mark -
@@ -28,6 +30,8 @@
 #pragma mark -
 #pragma mark Category Properties That Need To Be Synthesized
 //@synthesize not allowed in a category's implementation thus they must be in MessageCarrierAppDelegate.m
+
+@property (nonatomic, retain) Reachability *reach;
 
 +(MessageCarrierAppDelegate *) sharedMessageCarrierAppDelegate;
 @end

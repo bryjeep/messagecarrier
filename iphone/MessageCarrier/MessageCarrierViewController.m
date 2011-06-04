@@ -15,8 +15,8 @@
 @implementation MessageCarrierViewController
 @synthesize charCounter;
 @synthesize chooseContact;
-@synthesize MessageField, sentCnt, deliveredCnt, carriedCnt, sendMessageBtn, toField, messageType;
-@synthesize connectionLabel;
+@synthesize MessageField, sentCnt, deliveredCnt, carriedCnt, sendMessageBtn, toField, messageType, locationManager;
+@synthesize connectionLabel, coords;
 
 @synthesize networkManager;
 @synthesize message;
@@ -136,7 +136,7 @@
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    location = newLocation;
+    self.coords = newLocation.coordinate;
     [locationManager stopUpdatingLocation];
 }
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -199,6 +199,27 @@
     [self setConnectionCount:[nm currentPeerCount]];
     NSLog(@"removedPeer");
 }
+- (void) messageDelivery{
+    NSLog(@"messageDelivery");
+    
+    NSError *err;
+    NSManagedObjectContext *context = [MessageCarrierAppDelegate sharedMessageCarrierAppDelegate].managedObjectContext;
+    NSFetchRequest *request = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate]createFetchRequestForMessage];
+    NSPredicate *deliveredPredicate = [NSPredicate
+                                       predicateWithFormat:@"(Status == %@)",
+                                       [NSNumber numberWithInt:SENT]];
+    [request setPredicate:deliveredPredicate];
+    NSUInteger count = [context countForFetchRequest:request error:&err];
+    if(count == NSNotFound) {
+        //Handle error
+        deliveredNbr = 0;
+    } else {
+        deliveredNbr = count;
+    }
+    self.deliveredCnt.text = [[NSNumber numberWithInt:deliveredNbr] stringValue];
+    
+    [request release];
+}
 
 - (void)setConnectionCount:(NSUInteger) cnt{ 
     self.connectionLabel.text = [NSString stringWithFormat:@"%d Nearby Message Carrier%@", cnt, cnt != 1 ? @"s" : @""];
@@ -244,13 +265,19 @@
     NSManagedObjectContext* managedObjectContext = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext];
 	NSError *error = nil;
 	
+    if (!self.message) {
+        self.message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
+    }
+    
     self.message.Status         = [NSNumber numberWithInt: UNSENT];
 
     self.message.SourceID       = [[UIDevice currentDevice] uniqueIdentifier];
     self.message.Destination    = self.toField.text;
     self.message.MessageID      = [MessageCarrierAppDelegate createUUID];
     self.message.HopCount       = [NSNumber numberWithInt: 0];
-    self.message.Location       = [NSString stringWithFormat:@"%d,%d", location.coordinate.longitude, location.coordinate.latitude ];
+    if (self.locationManager) {
+        self.message.Location       = [NSString stringWithFormat:@"%f,%f", self.coords.latitude, self.coords.longitude];
+    }
     self.message.TimeStamp      = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     
     self.message.MessageType    = [NSNumber numberWithInt: [self.messageType selectedSegmentIndex]];
@@ -260,7 +287,8 @@
 	if ([managedObjectContext save: &error]){
         [self.networkManager sendMessage:self.message];
         
-        self.message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
+        self.message = nil;
+        
         self.toField.text = @"";
         self.MessageField.text = @"";
         sentNbr++;
