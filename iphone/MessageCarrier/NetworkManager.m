@@ -103,19 +103,29 @@
 - (void) receiveData:(NSData *)data fromPeer:(NSString *)peer inSession: (GKSession *)session context:(void *)context {
     NSLog(@"receiveData");
     if (self.currentSession.available) {
-        OutOfBandMessage *message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
-        
         NSString* string = [NSString stringWithUTF8String:[data bytes]];
-
+        NSLog(@"Received %@",string);
+        
         NSDictionary* dictionary = (NSDictionary*)[string JSONValue];
-        if([dictionary objectForKey:@"ACK"]){
+        if([dictionary objectForKey:@"ack"]){
+            //NSPredicate *desiredWeekPredicate = [NSPredicate predicateWithFormat:@"(currentWeek == %d)", currentWeekYouWant];
+            
+            NSLog(@"Received an ACK for %@",[dictionary objectForKey:@"messageid"]);
             [self.delegate networkManager: self
-                          receivedMessage: message
+                          receivedMessage: nil
                               wasAccepted: YES];
         }else{
+            NSError* error;
+            
+            OutOfBandMessage *message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];            
             [message setWithDictionaryRepresentation: dictionary];
-        
-            NSLog(@"Received %@",string);
+             
+            if(![[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext] save:&error]){
+                NSLog(@"Save Error %@",error);
+            }else{
+                NSDictionary* ack = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:TRUE],@"ack",message.MessageID,@"messageid",nil];
+                [self.currentSession sendData:[[ack JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] toPeers:[NSArray arrayWithObject: peer] withDataMode:GKSendDataReliable error:&error];               
+            }
         }
     }
 }

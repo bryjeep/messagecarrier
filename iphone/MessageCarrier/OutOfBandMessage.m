@@ -11,6 +11,7 @@
 
 @implementation OutOfBandMessage
 @dynamic Status;
+@dynamic MessageAttempts;
 
 @dynamic SourceID;
 @dynamic MessageID;
@@ -44,8 +45,8 @@
 -(void)setWithDictionaryRepresentation:(NSDictionary*)dictionary
 {
     self.SourceID = [dictionary objectForKey: @"sourceid"];
-    self.MessageID = [dictionary objectForKey: @"destination"];
-    self.Destination = [dictionary objectForKey: @"sourceid"];
+    self.MessageID = [dictionary objectForKey: @"messageid"];
+    self.Destination = [dictionary objectForKey: @"destination"];
     self.HopCount = [dictionary objectForKey: @"hopcount"];
     self.Location = [dictionary objectForKey: @"location"];
     self.TimeStamp = [dictionary objectForKey: @"timestamp"];

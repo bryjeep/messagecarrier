@@ -29,6 +29,7 @@ typedef enum
 @private
 }
 @property (nonatomic, retain) NSNumber * Status;
+@property (nonatomic, retain) NSNumber * MessageAttempts;
 
 @property (nonatomic, retain) NSString * SourceID;
 @property (nonatomic, retain) NSString * MessageID;

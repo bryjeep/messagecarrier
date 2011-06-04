@@ -118,4 +118,13 @@
     return message;
 }
 
+-(NSFetchRequest *) createFetchRequestForMessage
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"OutOfBandMessage" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+
+    return fetchRequest;
+}
 @end

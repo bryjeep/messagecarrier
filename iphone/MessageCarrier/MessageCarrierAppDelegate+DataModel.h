@@ -26,6 +26,7 @@
 -(void)removeExistingStore;
 
 -(OutOfBandMessage *) createOutOfBoundMessage;
+-(NSFetchRequest *) createFetchRequestForMessage;          
 
 @end
 
