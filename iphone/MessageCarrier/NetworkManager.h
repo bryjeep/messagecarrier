@@ -3,7 +3,7 @@
 //  MessageCarrier
 //
 //  Created by Joey Gibson on 6/3/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 org.rhok. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,11 +11,22 @@
 #import "Message.h"
 
 #define SESSION_ID @"MessageCarrier"
+#define MESSAGE_ID @"MESSAGE_ID"
+#define HOP_COUNT @"HOP_COUNT"
+#define SOURCE_ID @"SOURCE_ID"
+#define MESSAGE_TYPE @"MESSAGE_TYPE"
+#define DESTINATION @"DESTINATION"
+#define MESSAGE_BODY @"MESSAGE_BODY"
+#define STATUS @"STATUS"
+#define MESSAGE_WAS_ACCEPTED @"MESSAGE_WAS_ACCEPTED"
+
+@class NetworkManager;
 
 @protocol NetworkManagerDelegate <NSObject>
 
-- (void) messageSent: (Message *) message;
-- (void) messageReceived: (Message *) message;
+- (void) networkManager: (NetworkManager *) networkManager sentMessage: (Message *) message;
+- (void) networkManager: (NetworkManager *) networkManager receivedMessage: (Message *) message wasAccepted: (BOOL) accepted;
+- (void) networkManagerDiscoveredPeers: (NetworkManager *) networkManager;
 @end
 
 @interface NetworkManager : NSObject <GKSessionDelegate> {
@@ -23,10 +34,9 @@
 }
 
 @property (nonatomic, retain) id <NetworkManagerDelegate> delegate;
-@property (nonatomic, retain) GKSession *currentSession;
 
+- (BOOL) startup;
 - (void) shutdown;
-- (NSError *) sendMessage: (Message *) message;
-- (NSArray *) localPeers;
+- (NSError *) sendMessage: (Message *) message asAccepted: (BOOL) accepted;
 - (BOOL) peersNearby;
 @end
