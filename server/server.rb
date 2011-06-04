@@ -7,8 +7,8 @@ require './database'
 require 'builder'
 require 'twiliolib'
 require 'yajl'
-
 require 'net/smtp'
+require 'twitter'
 
 API_VERSION = '2010-04-01'
 ACCOUNT_SID = 'AC811c26b1ded5a7246241880f9ec98334'
@@ -62,7 +62,17 @@ Net::SMTP.start(smtp_host, smtp_port, smtp_domain, smtp_user, smtp_pwd, :plain) 
   smtp.send_message emailmsg, from, to
 end
 =end  
-  
+=begin  
+Twitter.configure do |config|
+  config.consumer_key = 'S11BNOKK1uwsTFFmfTYA'
+  config.consumer_secret = 'z29Ttv1OmBH0Qvo0mI6C3wLn4787lldjLMWGKdiDQ'
+  config.oauth_token = '310774926-mr98j32Iq9TxHsPttnNlQsM17B0svm3oSbDcRYQo'
+  config.oauth_token_secret = 'MIlROjzxOTulvZszM3WP9l05aE43GnoIAigRSupmhLA'
+end
+
+# Update your status
+Twitter.update("Hello World from the Message Carrier Team!")  
+=end  
 end
 
 post "/messages" do
