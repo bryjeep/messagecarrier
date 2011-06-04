@@ -34,6 +34,7 @@
     [self.sendMessageBtn dealloc];
     [self.toField dealloc];
     [self.messageType dealloc];
+    [locationManager dealloc];
 }
 
 - (id) init {
@@ -126,6 +127,20 @@
     UIImage *stretchableButtonImagePressed = [buttonImagePressed stretchableImageWithLeftCapWidth:12 topCapHeight:0];
     [self.sendMessageBtn setBackgroundImage:stretchableButtonImagePressed forState:UIControlStateHighlighted];
     [self setConnectionCount:0];
+    
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    
+
+}
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    location = newLocation;
+    [locationManager stopUpdatingLocation];
+}
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [locationManager startUpdatingLocation];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -260,7 +275,7 @@
     self.message.Destination    = self.toField.text;
     self.message.MessageID      = [MessageCarrierAppDelegate createUUID];
     self.message.HopCount       = [NSNumber numberWithInt: 0];
-    self.message.Location       = @"Unknown";
+    self.message.Location       = [NSString stringWithFormat:@"%d,%d", location.coordinate.longitude, location.coordinate.latitude ];
     self.message.TimeStamp      = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     
     self.message.MessageType    = [NSNumber numberWithInt: [self.messageType selectedSegmentIndex]];
