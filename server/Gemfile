@@ -5,6 +5,7 @@ gem "sequel"
 gem "sinatra-sequel"
 gem "sqlite3"
 gem "yajl-ruby", :require => "yajl"
+gem "twiliolib"
 
 group :development do
   gem "sinatra-reloader"
