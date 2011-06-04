@@ -8,6 +8,8 @@
 
 #import "JSON.h"
 #import "ServerInterfaceManager.h"
+#import "Message.h"
+#import "MessageCarrierAppDelegate+DataModel.h"
 #import "MessageCarrierAppDelegate+Utility.h"
 
 @implementation ServerInterfaceManager
@@ -21,10 +23,12 @@
     
     [MessageCarrierAppDelegate asyncRequest:request
                                     success:^(NSData * data, NSURLResponse * response){
-                                        
+                                        //Message got sent
+                                        message.Status = [NSNumber numberWithUnsignedInt: SENT];
                                     }
                                     failure:^(NSData * data, NSError * response){
-                                        
+                                        //Message got sent
+                                        message.Status = [NSNumber numberWithUnsignedInt: FAILED];
                                     }];
 }
 

@@ -19,13 +19,13 @@
 }
 
 #pragma mark -
-#pragma mark Properties That Need To Be Synthesized
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet MessageCarrierViewController *viewController;
 
+#pragma mark -
+#pragma mark Category Properties That Need To Be Synthesized
 //@synthesize not allowed in a category's implementation thus they must be in MessageCarrierAppDelegate.m
 
-
--(NSString *)applicationDocumentsDirectory;
++(MessageCarrierAppDelegate *) sharedMessageCarrierAppDelegate;
 @end

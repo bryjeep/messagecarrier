@@ -1,5 +1,5 @@
 //
-//  Message.h
+//  OutOfBandMessage.h
 //  MessageCarrier
 //
 //  Created by Brian Davidson on 6/3/11.
@@ -9,6 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+typedef enum 
+{
+    SMS = 0,
+    EMAIL = 1,
+    TWITTER = 2
+    
+} MESSAGE_TYPE;
+
+typedef enum 
+{
+    FAILED = -1,
+    UNSENT = 0,
+    SENT = 1
+    
+} MESSAGE_STATUS;
 
 @interface Message : NSManagedObject {
 @private
