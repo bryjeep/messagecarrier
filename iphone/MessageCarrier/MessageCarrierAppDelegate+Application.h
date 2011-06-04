@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "MessageCarrierAppDelegate.h"
+
 @interface MessageCarrierAppDelegate ( Application )
 
 // Category Definition

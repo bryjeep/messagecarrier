@@ -6,7 +6,7 @@
 //  Copyright 2011 Georgia Institute of Technology. All rights reserved.
 //
 
-#import "JSON.h"
+#import "SBJson.h"
 #import "ServerInterfaceManager.h"
 #import "OutOfBandMessage.h"
 #import "MessageCarrierAppDelegate+DataModel.h"
