@@ -19,6 +19,9 @@
 #define MESSAGE_BODY @"MESSAGE_BODY"
 #define STATUS @"STATUS"
 #define MESSAGE_WAS_ACCEPTED @"MESSAGE_WAS_ACCEPTED"
+#define SENDER_NAME @"SENDER_NAME"
+#define DATE_TIME @"DATE_TIME"
+#define LOCATION @"LOCATION"
 
 @class NetworkManager;
 

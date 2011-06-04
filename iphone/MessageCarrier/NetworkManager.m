@@ -91,6 +91,10 @@
         message.MessageBody = [unarchiver decodeObjectForKey: MESSAGE_BODY];
         message.Status = [unarchiver decodeObjectForKey: STATUS];
 
+//#define SENDER_NAME @"SENDER_NAME"
+//#define DATE_TIME @"DATE_TIME"
+//#define LOCATION @"LOCATION"
+
         BOOL accepted = [unarchiver decodeBoolForKey: MESSAGE_WAS_ACCEPTED];
         
         [self.delegate networkManager: self
@@ -100,8 +104,6 @@
         [unarchiver release];
     }
 }
-
-// Store array of peers - when new array comes in, compare to existing one - if same, do nothing.
 
 #pragma mark - Action Methods
 - (NSError *) sendMessage: (Message *) message asAccepted: (BOOL) accepted {
@@ -118,6 +120,11 @@
         [archiver encodeObject: message.Destination forKey: DESTINATION];
         [archiver encodeObject: message.MessageBody forKey: MESSAGE_BODY];
         [archiver encodeObject: message.Status forKey: STATUS];
+        
+//#define SENDER_NAME @"SENDER_NAME"
+//#define DATE_TIME @"DATE_TIME"
+//#define LOCATION @"LOCATION"
+
         [archiver encodeBool: accepted forKey: MESSAGE_WAS_ACCEPTED];
          
         [archiver finishEncoding];
