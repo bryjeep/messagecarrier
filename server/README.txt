@@ -25,5 +25,5 @@ PUSHING LIVE (not yet)
 "status" : Int #404 = failure; 200 = successfully sent and received
 "sendername" : String #User Entered name of sender
 "location" : String #GPS coordinates, format TBD
-"timestamp" : String #format TBD
+"timestamp" : String #unix time stamp
 

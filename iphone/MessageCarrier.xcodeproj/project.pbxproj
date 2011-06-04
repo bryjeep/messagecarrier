@@ -43,6 +43,13 @@
 		37D8B6971399C38500B3D0F5 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B6891399C38500B3D0F5 /* SBJsonTokeniser.m */; };
 		37D8B6981399C38500B3D0F5 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B68B1399C38500B3D0F5 /* SBJsonUTF8Stream.m */; };
 		37D8B6991399C38500B3D0F5 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B68D1399C38500B3D0F5 /* SBJsonWriter.m */; };
+		37D8B7081399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B7071399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m */; };
+		6C74F9351399EC3300A2DB22 /* action-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C74F9331399EC3300A2DB22 /* action-normal.png */; };
+		6C74F9361399EC3300A2DB22 /* action-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C74F9341399EC3300A2DB22 /* action-pressed.png */; };
+		6C74F93A1399F10B00A2DB22 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C74F9381399F10B00A2DB22 /* AddressBook.framework */; };
+		6C74F93B1399F10B00A2DB22 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C74F9391399F10B00A2DB22 /* AddressBookUI.framework */; };
+		6C74F9411399FFE100A2DB22 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C74F9401399FFE100A2DB22 /* icon.png */; };
+		6C74F9431399FFEE00A2DB22 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C74F9421399FFEE00A2DB22 /* icon@2x.png */; };
 		6CED60FD1399E13B00103320 /* UITextViewWithPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CED60FC1399E13B00103320 /* UITextViewWithPlaceholder.m */; };
 		6CED61081399E6E000103320 /* 027-AddressBook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CED61071399E6E000103320 /* 027-AddressBook@2x.png */; };
 /* End PBXBuildFile section */
@@ -119,6 +126,17 @@
 		37D8B68B1399C38500B3D0F5 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		37D8B68C1399C38500B3D0F5 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		37D8B68D1399C38500B3D0F5 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+		37D8B7061399CD2B00B3D0F5 /* MessageCarrierAppDelegate+Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MessageCarrierAppDelegate+Application.h"; sourceTree = "<group>"; };
+		37D8B7071399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MessageCarrierAppDelegate+Application.m"; sourceTree = "<group>"; };
+		6C74F9331399EC3300A2DB22 /* action-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-normal.png"; sourceTree = "<group>"; };
+		6C74F9341399EC3300A2DB22 /* action-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-pressed.png"; sourceTree = "<group>"; };
+		6C74F9381399F10B00A2DB22 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		6C74F9391399F10B00A2DB22 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		6C74F9401399FFE100A2DB22 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		6C74F9421399FFEE00A2DB22 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+>>>>>>> 841f98b6acae4539dbe151f685e819bd1def73e5
 		6CED60FB1399E13B00103320 /* UITextViewWithPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextViewWithPlaceholder.h; sourceTree = "<group>"; };
 		6CED60FC1399E13B00103320 /* UITextViewWithPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextViewWithPlaceholder.m; sourceTree = "<group>"; };
 		6CED61071399E6E000103320 /* 027-AddressBook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "027-AddressBook@2x.png"; sourceTree = "<group>"; };
@@ -129,6 +147,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C74F93A1399F10B00A2DB22 /* AddressBook.framework in Frameworks */,
+				6C74F93B1399F10B00A2DB22 /* AddressBookUI.framework in Frameworks */,
 				17AC01F813999C1100ABADAC /* CoreData.framework in Frameworks */,
 				1765A01B139985DB009DF548 /* GameKit.framework in Frameworks */,
 				17659FD313997FC8009DF548 /* UIKit.framework in Frameworks */,
@@ -153,6 +173,10 @@
 		17659FC313997FC8009DF548 = {
 			isa = PBXGroup;
 			children = (
+				6C74F9421399FFEE00A2DB22 /* icon@2x.png */,
+				6C74F9401399FFE100A2DB22 /* icon.png */,
+				6C74F9381399F10B00A2DB22 /* AddressBook.framework */,
+				6C74F9391399F10B00A2DB22 /* AddressBookUI.framework */,
 				17AC01F713999C1100ABADAC /* CoreData.framework */,
 				1765A01A139985DB009DF548 /* GameKit.framework */,
 				17659FD813997FC8009DF548 /* MessageCarrier */,
@@ -287,6 +311,8 @@
 		6CED61091399E6ED00103320 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6C74F9331399EC3300A2DB22 /* action-normal.png */,
+				6C74F9341399EC3300A2DB22 /* action-pressed.png */,
 				6CED61071399E6E000103320 /* 027-AddressBook@2x.png */,
 			);
 			name = Resources;
@@ -363,6 +389,10 @@
 				17659FE613997FC8009DF548 /* MainWindow.xib in Resources */,
 				17659FEC13997FC8009DF548 /* MessageCarrierViewController.xib in Resources */,
 				6CED61081399E6E000103320 /* 027-AddressBook@2x.png in Resources */,
+				6C74F9351399EC3300A2DB22 /* action-normal.png in Resources */,
+				6C74F9361399EC3300A2DB22 /* action-pressed.png in Resources */,
+				6C74F9411399FFE100A2DB22 /* icon.png in Resources */,
+				6C74F9431399FFEE00A2DB22 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
