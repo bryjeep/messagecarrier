@@ -133,14 +133,12 @@
     NSLog(@"discoveredPeer");
 }
 - (void) networkManagerConnectedPeer: (NetworkManager *) networkManager {
-    connectionCnt ++;
-    [self setConnectionCount:connectionCnt];
+    [self setConnectionCount:[networkManager currentPeerCount]];
     NSLog(@"addedPeer");
 }
 - (void) networkManagerDisconnectedPeer: (NetworkManager *) networkManager {
+    [self setConnectionCount:[networkManager currentPeerCount]];
     NSLog(@"removedPeer");
-    connectionCnt--;
-    [self setConnectionCount:connectionCnt];
 }
 
 - (void)setConnectionCount:(NSUInteger) cnt{ 

@@ -25,9 +25,7 @@
 @end
 
 @interface NetworkManager : NSObject <GKSessionDelegate> {
-    NSTimer *timer;
-    GKSession *currentSession;
-    NSMutableArray *peers;   
+    GKSession *currentSession; 
 }
 
 @property (nonatomic, retain) id <NetworkManagerDelegate> delegate;
@@ -36,6 +34,7 @@
 - (void) shutdown;
 - (NSError *) sendMessage: (OutOfBandMessage *) message;
 - (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted;
+- (int) currentPeerCount;
 
 @end
 

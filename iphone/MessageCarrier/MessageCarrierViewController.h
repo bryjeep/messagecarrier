@@ -28,7 +28,7 @@
     UITextField *toField;
     UILabel *charCounter;
     UILabel *connectionLabel;
-    NSUInteger connectionCnt;
+#pragma mark -
     NetworkManager *networkManager;
     OutOfBandMessage *message;
 }

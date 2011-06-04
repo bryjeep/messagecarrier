@@ -13,9 +13,8 @@
 
 @interface NetworkManager ()
 
-@property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, retain) GKSession *currentSession;
-@property (nonatomic, retain) NSMutableArray *peers;
+
 @end;
 
 @interface NetworkManager ()//Private Methods
@@ -26,8 +25,7 @@
 
 @synthesize currentSession;
 @synthesize delegate;
-@synthesize timer;
-@synthesize peers;
+
 
 #pragma mark -
 
@@ -41,8 +39,6 @@
         self.currentSession.delegate = self;
         [self.currentSession setDataReceiveHandler: self
                                        withContext: nil];
-        
-        self.peers = [NSMutableArray arrayWithCapacity:16];
     }
     
     return self;
@@ -51,8 +47,6 @@
 - (void) dealloc {
     self.currentSession = nil;
     self.delegate = nil;
-    self.timer = nil;
-    self.peers = nil;
     
     [super dealloc];
 }
@@ -65,21 +59,19 @@
      selector:@selector(bluetoothAvailabilityChanged:)
      name:@"BluetoothAvailabilityChangedNotification"
      object:nil];
-    
-    //[self checkForPeers];
-    
+
     return YES;
 }
 
 - (void)shutdown {
-    [self.timer invalidate];
-    
     self.currentSession.available = NO;
     
-    self.timer = nil;
     self.currentSession = nil;
 }
 
+- (int)currentPeerCount {
+    return [self.currentSession peersWithConnectionState:GKPeerStateConnected];
+}
 #pragma mark
 
 - (void)bluetoothAvailabilityChanged:(NSNotification *)notification {
@@ -127,6 +119,7 @@
 
 
 #pragma mark - GKSessionDelegate Methods
+
 /* Indicates a state change for the given peer.
  */
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
