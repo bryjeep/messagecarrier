@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NetworkManager.h"
 
-@interface MessageCarrierViewController : UIViewController {
+@interface MessageCarrierViewController : UIViewController <NetworkManagerDelegate> {
     
 }
 
+@property (nonatomic, retain) NetworkManager *networkManager;
 @end

@@ -10,6 +10,8 @@
 
 @implementation MessageCarrierViewController
 
+@synthesize networkManager;
+
 - (void)dealloc
 {
     [super dealloc];
@@ -32,6 +34,31 @@
     [super viewDidLoad];
 }
 */
+
+- (void) networkManager: (NetworkManager *) networkManager sentMessage: (Message *) message {
+    NSLog(@"sentMessage");
+}
+
+- (void) networkManager: (NetworkManager *) networkManager receivedMessage: (Message *) message wasAccepted: (BOOL) accepted {
+    NSLog(@"receivedMessage");
+}
+
+- (void) networkManagerDiscoveredPeers: (NetworkManager *) networkManager {
+    NSLog(@"discoveredPeers");
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear: animated];
+    
+    self.networkManager = [[NetworkManager alloc] init];
+    self.networkManager.delegate = self;
+    
+    [self.networkManager startup];
+    
+//    GKPeerPickerController *picker = [[GKPeerPickerController alloc] init];
+//    picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
+//    [picker show];    
+}
 
 - (void)viewDidUnload
 {
