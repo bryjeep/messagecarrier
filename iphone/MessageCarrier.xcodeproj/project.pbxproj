@@ -407,7 +407,6 @@
 				37D8B6981399C38500B3D0F5 /* SBJsonUTF8Stream.m in Sources */,
 				37D8B6991399C38500B3D0F5 /* SBJsonWriter.m in Sources */,
 				37D8B7081399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m in Sources */,
->>>>>>> f42b6db5a2e48e6c92929f8ba1acf9e14d5847ea
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
