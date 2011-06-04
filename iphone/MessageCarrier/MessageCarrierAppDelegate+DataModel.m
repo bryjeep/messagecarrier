@@ -108,4 +108,14 @@
     return persistentStoreCoordinator;
 }
 
+-(OutOfBandMessage *) createOutOfBoundMessage
+{
+	NSEntityDescription *messageEntityDescription = [NSEntityDescription entityForName:@"OutOfBandMessage" inManagedObjectContext: self.managedObjectContext];
+	//NSManagedObjectModel *managedObjectModel = [[managedObjectContext persistentStoreCoordinator] managedObjectModel];
+    
+	OutOfBandMessage* message = [[[NSManagedObject alloc] initWithEntity: messageEntityDescription
+                                          insertIntoManagedObjectContext: managedObjectContext] retain];
+    return message;
+}
+
 @end

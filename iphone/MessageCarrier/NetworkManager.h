@@ -29,11 +29,16 @@
 
 - (void) networkManager: (NetworkManager *) networkManager sentMessage: (OutOfBandMessage *) message;
 - (void) networkManager: (NetworkManager *) networkManager receivedMessage: (OutOfBandMessage *) message wasAccepted: (BOOL) accepted;
-- (void) networkManagerDiscoveredPeers: (NetworkManager *) networkManager;
+- (void) networkManagerDiscoveredPeer: (NetworkManager *) networkManager;
+- (void) networkManagerConnectedPeer: (NetworkManager *) networkManager;
+- (void) networkManagerDisconnectedPeer: (NetworkManager *) networkManager;
+
 @end
 
 @interface NetworkManager : NSObject <GKSessionDelegate> {
-    
+    NSTimer *timer;
+    GKSession *currentSession;
+    NSMutableArray *peers;   
 }
 
 @property (nonatomic, retain) id <NetworkManagerDelegate> delegate;
@@ -42,5 +47,6 @@
 - (void) shutdown;
 - (NSError *) sendMessage: (OutOfBandMessage *) message;
 - (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted;
-- (BOOL) peersNearby;
+
 @end
+

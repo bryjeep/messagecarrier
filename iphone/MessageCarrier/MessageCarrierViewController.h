@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NetworkManager.h"
 #import "UITextViewWithPlaceholder.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UITextViewWithPlaceholder.h"
+
+#import "NetworkManager.h"
+#import "OutOfBandMessage.h"
 
 @interface MessageCarrierViewController : UIViewController<UITextViewDelegate,NetworkManagerDelegate> {
 	UITextViewWithPlaceholder *MessageField;
@@ -20,6 +22,9 @@
     UIButton *sendMessageBtn;
     UISegmentedControl *messageType;
     UITextField *toField;
+    
+    NetworkManager *networkManager;
+    OutOfBandMessage *message;
 }
 
 @property (nonatomic, retain) IBOutlet UITextViewWithPlaceholder *MessageField;
@@ -30,6 +35,7 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *messageType;
 @property (nonatomic, retain) IBOutlet UITextField *toField;
 @property (nonatomic, retain) NetworkManager *networkManager;
+@property (nonatomic, retain) OutOfBandMessage* message;
 
 -(void)sendMessage;
 - (IBAction)SendMessageClicked:(id)sender;

@@ -6,14 +6,21 @@
 //  Copyright 2011 org.rhok. All rights reserved.
 //
 
+#import "SBJson.h"
+
 #import "NetworkManager.h"
+#import "MessageCarrierAppDelegate+DataModel.h"
 
 @interface NetworkManager ()
 
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, retain) GKSession *currentSession;
-@property (nonatomic, retain) NSArray *peers;
+@property (nonatomic, retain) NSMutableArray *peers;
 @end;
+
+@interface NetworkManager ()//Private Methods
+
+@end
 
 @implementation NetworkManager
 
@@ -21,6 +28,8 @@
 @synthesize delegate;
 @synthesize timer;
 @synthesize peers;
+
+#pragma mark -
 
 - (id) init {
     self = [super init];
@@ -32,6 +41,8 @@
         self.currentSession.delegate = self;
         [self.currentSession setDataReceiveHandler: self
                                        withContext: nil];
+        
+        self.peers = [NSMutableArray arrayWithCapacity:16];
     }
     
     return self;
@@ -46,20 +57,6 @@
     [super dealloc];
 }
 
-- (void) checkForPeers {
-    if ([self peersNearby]) {
-        [self.delegate networkManagerDiscoveredPeers: self];
-    }
-    
-    if (!self.timer) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval: 10.0
-                                                      target: self
-                                                    selector: @selector(checkForPeers)
-                                                    userInfo: nil
-                                                     repeats: YES];
-    }
-}
-
 - (BOOL) startup {
     self.currentSession.available = YES;
     
@@ -69,13 +66,9 @@
      name:@"BluetoothAvailabilityChangedNotification"
      object:nil];
     
-    [self checkForPeers];
+    //[self checkForPeers];
     
     return YES;
-}
-
-- (void)bluetoothAvailabilityChanged:(NSNotification *)notification {
-    NSLog(@"BT NOT: %@", notification);
 }
 
 - (void)shutdown {
@@ -87,29 +80,74 @@
     self.currentSession = nil;
 }
 
+#pragma mark
+
+- (void)bluetoothAvailabilityChanged:(NSNotification *)notification {
+    NSLog(@"BT NOT: %@", notification);
+}
+
+#pragma mark - Send And Receive
+
+- (NSError *) sendMessage: (OutOfBandMessage *) message {
+    return [self sendMessage: message asAccepted: NO];
+}
+
+- (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted {
+    NSError *error = nil;
+    
+    NSLog(@"Sending %@",[message string]);
+    
+    if (self.currentSession.available) {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData: data];
+        
+        [archiver encodeObject: message.MessageID forKey: kMESSAGE_ID];
+        [archiver encodeObject: message.HopCount forKey: kHOP_COUNT];
+        [archiver encodeObject: message.SourceID forKey: kSOURCE_ID];
+        [archiver encodeObject: message.MessageType forKey: kMESSAGE_TYPE];
+        [archiver encodeObject: message.Destination forKey: kDESTINATION];
+        [archiver encodeObject: message.MessageBody forKey: kMESSAGE_BODY];
+        [archiver encodeObject: message.Status forKey: kSTATUS];
+        [archiver encodeObject: message.SenderName forKey: kSENDER_NAME];
+        [archiver encodeObject: message.TimeStamp forKey: kDATE_TIME];
+        [archiver encodeObject: message.Location forKey: kLOCATION];
+        
+        [archiver encodeBool: accepted forKey: kMESSAGE_WAS_ACCEPTED];
+        
+        // TESTING
+        //        [archiver encodeObject: @"12345" forKey: kMESSAGE_ID];
+        //        [archiver encodeObject: @"This is a test" forKey: kMESSAGE_BODY];
+        
+        [archiver finishEncoding];
+        
+        [self.currentSession sendDataToAllPeers: data
+                                   withDataMode: GKSendDataReliable
+                                          error: &error];        
+        [archiver release];
+    }
+    
+    return error;
+}
+
 - (void) receiveData:(NSData *)data fromPeer:(NSString *)peer inSession: (GKSession *)session context:(void *)context {
-    NSLog(@"receiveDate");
+    NSLog(@"receiveData");
     if (self.currentSession.available) {        
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData: data];
-        
-        OutOfBandMessage *message = [[OutOfBandMessage alloc] init];
-        
-//        message.MessageID = [unarchiver decodeObjectForKey: kMESSAGE_ID];
-//        message.HopCount = [unarchiver decodeObjectForKey: kHOP_COUNT];
-//        message.SourceID = [unarchiver decodeObjectForKey: kSOURCE_ID];
-//        message.MessageType = [unarchiver decodeObjectForKey: kMESSAGE_TYPE];
-//        message.Destination = [unarchiver decodeObjectForKey: kDESTINATION];
-//        message.MessageBody = [unarchiver decodeObjectForKey: kMESSAGE_BODY];
-//        message.Status = [unarchiver decodeObjectForKey: kSTATUS];
-//        message.SenderName = [unarchiver decodeObjectForKey: kSENDER_NAME];
-//        message.TimeStamp = [unarchiver decodeObjectForKey: kDATE_TIME];
-//        message.Location = [unarchiver decodeObjectForKey: kLOCATION];
 
-        // TESTING
-        NSString *id = [unarchiver decodeObjectForKey: kMESSAGE_ID];
-        NSString *body = [unarchiver decodeObjectForKey: kMESSAGE_BODY];
+        OutOfBandMessage *message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
         
-        NSLog(@"ID: %@, Body: %@", id, body);
+        message.MessageID = [unarchiver decodeObjectForKey: kMESSAGE_ID];
+        message.HopCount = [unarchiver decodeObjectForKey: kHOP_COUNT];
+        message.SourceID = [unarchiver decodeObjectForKey: kSOURCE_ID];
+        message.MessageType = [unarchiver decodeObjectForKey: kMESSAGE_TYPE];
+        message.Destination = [unarchiver decodeObjectForKey: kDESTINATION];
+        message.MessageBody = [unarchiver decodeObjectForKey: kMESSAGE_BODY];
+        message.Status = [unarchiver decodeObjectForKey: kSTATUS];
+        message.SenderName = [unarchiver decodeObjectForKey: kSENDER_NAME];
+        message.TimeStamp = [unarchiver decodeObjectForKey: kDATE_TIME];
+        message.Location = [unarchiver decodeObjectForKey: kLOCATION];
+        
+        NSLog(@"Received %@",[message string]);
         
         BOOL accepted = [unarchiver decodeBoolForKey: kMESSAGE_WAS_ACCEPTED];
         
@@ -121,84 +159,35 @@
     }
 }
 
-#pragma mark - Action Methods
-- (NSError *) sendMessage: (OutOfBandMessage *) message {
-    return [self sendMessage: message asAccepted: NO];
-}
-
-- (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted {
-    NSError *error = nil;
-
-    if (self.currentSession.available) {
-        NSMutableData *data = [[NSMutableData alloc] init];
-        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData: data];
-        
-//        [archiver encodeObject: message.MessageID forKey: kMESSAGE_ID];
-//        [archiver encodeObject: message.HopCount forKey: kHOP_COUNT];
-//        [archiver encodeObject: message.SourceID forKey: kSOURCE_ID];
-//        [archiver encodeObject: message.MessageType forKey: kMESSAGE_TYPE];
-//        [archiver encodeObject: message.Destination forKey: kDESTINATION];
-//        [archiver encodeObject: message.MessageBody forKey: kMESSAGE_BODY];
-//        [archiver encodeObject: message.Status forKey: kSTATUS];
-//        [archiver encodeObject: message.SenderName forKey: kSENDER_NAME];
-//        [archiver encodeObject: message.TimeStamp forKey: kDATE_TIME];
-//        [archiver encodeObject: message.Location forKey: kLOCATION];
-//
-//        [archiver encodeBool: accepted forKey: kMESSAGE_WAS_ACCEPTED];
-
-        // TESTING
-        [archiver encodeObject: @"12345" forKey: kMESSAGE_ID];
-        [archiver encodeObject: @"This is a test" forKey: kMESSAGE_BODY];
-        
-        [archiver finishEncoding];
-        
-//        [self.currentSession sendDataToAllPeers: data
-//                                   withDataMode: GKSendDataReliable
-//                                          error: &error];
-        
-        for (NSString *peerID in self.peers) {
-            [self.currentSession sendData: data
-                                  toPeers: [NSArray arrayWithObject: peerID]
-                             withDataMode: GKSendDataReliable
-                                    error: &error];
-            
-            if (!error) {
-                [self.delegate networkManager: self
-                                  sentMessage: message];
-            }
-        }
-        
-        [archiver release];
-    }
-    
-    return error;
-}
-
-- (NSArray *) localPeers {
-    return [self.currentSession peersWithConnectionState: GKPeerStateAvailable];
-}
-
-- (BOOL) peersNearby {
-    NSInteger count = 0;
-    
-    NSArray *localPeers = [self localPeers];
-
-//    NSLog(@"Peers: %@", localPeers);
-    
-    if (![self.peers isEqualToArray: localPeers]) {
-        self.peers = localPeers;
-        
-        count = [localPeers count];
-    }
-    
-    return count != 0;
-}
 
 #pragma mark - GKSessionDelegate Methods
 /* Indicates a state change for the given peer.
  */
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
-    NSLog(@"%@ didChangeState: %d", peerID, state);
+    switch (state) {
+        case GKPeerStateAvailable:
+            NSLog(@"Avaiable To Connect To Peer %@", peerID);
+            [self.delegate networkManagerDiscoveredPeer: self];
+            [self.currentSession connectToPeer: peerID withTimeout: 60];
+            break;        
+        case GKPeerStateUnavailable:
+            NSLog(@"Unable To Connect To Peer %@", peerID);
+            break;
+        case GKPeerStateConnected:
+            [self.delegate networkManagerConnectedPeer: self];
+            NSLog(@"Connected To Peer %@", peerID);
+            break;        
+        case GKPeerStateDisconnected:
+            [self.delegate networkManagerDisconnectedPeer: self];
+            NSLog(@"Disconnected From Peer %@", peerID);
+            break;        
+        case GKPeerStateConnecting:
+            NSLog(@"Connecting To Peer %@", peerID);
+            break;
+        default:
+            NSLog(@"%@ didChangeState: %d", peerID, state);
+            break;
+    }
 }
 
 /* Indicates a connection request was received from another peer. 
@@ -209,8 +198,11 @@
     NSError *error = nil;
     
     if (self.currentSession.available) {
+        NSLog(@"Accepting Connection");
         [session acceptConnectionFromPeer: peerID
                                     error: &error];
+    }else{
+        NSLog(@"---->Not Accepting Connection");
     }
 }
 

@@ -41,4 +41,7 @@
 	return dict;
 }
 
+-(NSString *) string {
+    return [NSString stringWithFormat:@"Status = %@\nSourceID = %@\nMessageID=%@\nDestination=%@\nHopCount=%@\nLocation=%@\nTimeStamp=%@\nMessageType=%@\nSenderName=%@\nMessageBody=%@",self.Status,self.SourceID,self.MessageID,self.Destination,self.HopCount,self.Location,self.TimeStamp,self.MessageType,self.SenderName,self.MessageBody];
+}
 @end

@@ -25,5 +25,7 @@
 
 -(void)removeExistingStore;
 
+-(OutOfBandMessage *) createOutOfBoundMessage;
+
 @end
 
