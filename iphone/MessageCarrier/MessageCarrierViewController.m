@@ -15,11 +15,13 @@
 @synthesize MessageField, sentCnt, deliveredCnt, carriedCnt, sendMessageBtn, toField, messageType;
 
 @synthesize networkManager;
+@synthesize connectionLabel;
 
 - (void)dealloc
 {
     [chooseContact release];
     [charCounter release];
+    [connectionLabel release];
     [super dealloc];
     [self.MessageField dealloc];
     [self.sentCnt dealloc];
@@ -70,9 +72,8 @@
     UIImage *buttonImagePressed = [UIImage imageNamed:@"action-pressed.png"];
     UIImage *stretchableButtonImagePressed = [buttonImagePressed stretchableImageWithLeftCapWidth:12 topCapHeight:0];
     [self.sendMessageBtn setBackgroundImage:stretchableButtonImagePressed forState:UIControlStateHighlighted];
-    
+    [self setConnectionCount:0];
 }
-
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -115,12 +116,17 @@
     NSLog(@"receivedMessage");
 }
 
+
 - (void) networkManagerDiscoveredPeers: (NetworkManager *) networkManager {
     NSLog(@"discoveredPeers");
     
     [self.networkManager sendMessage: nil];
-}
+    [self setConnectionCount:1];
 
+}
+- (void)setConnectionCount:(NSUInteger) cnt{ 
+    self.connectionLabel.text = [NSString stringWithFormat:@"%d Nearby Message Carrier%@", cnt, cnt != 1 ? @"s" : @""];
+}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
     
@@ -145,6 +151,7 @@
 {
     [self setChooseContact:nil];
     [self setCharCounter:nil];
+    [self setConnectionLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -175,7 +182,7 @@
             break;
         case 2:
             self.toField.enabled = NO;
-            self.toField.placeholder = @"na";
+            self.toField.placeholder = @"not used";
             self.chooseContact.enabled = NO;
             break;
         default:

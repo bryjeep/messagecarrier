@@ -25,6 +25,7 @@
     UISegmentedControl *messageType;
     UITextField *toField;
     UILabel *charCounter;
+    UILabel *connectionLabel;
 }
 @property (nonatomic, retain) IBOutlet UILabel *charCounter;
 
@@ -37,10 +38,11 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *messageType;
 @property (nonatomic, retain) IBOutlet UITextField *toField;
 @property (nonatomic, retain) NetworkManager *networkManager;
+@property (nonatomic, retain) IBOutlet UILabel *connectionLabel;
 
 - (IBAction)choseContactTouch:(id)sender;
 -(void)sendMessage;
 - (IBAction)SendMessageClicked:(id)sender;
 - (IBAction)MessageTypeChanged:(id)sender;
-
+- (void)setConnectionCount:(NSUInteger) cnt;
 @end
