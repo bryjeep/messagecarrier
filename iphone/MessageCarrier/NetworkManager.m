@@ -95,35 +95,14 @@
 - (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted {
     NSError *error = nil;
     
-    NSLog(@"Sending %@",[message string]);
+    NSString *dataString = [[message dictionaryRepresentation] JSONRepresentation];
     
-    if (self.currentSession.available) {
-        NSMutableData *data = [[NSMutableData alloc] init];
-        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData: data];
-        
-        [archiver encodeObject: message.MessageID forKey: kMESSAGE_ID];
-        [archiver encodeObject: message.HopCount forKey: kHOP_COUNT];
-        [archiver encodeObject: message.SourceID forKey: kSOURCE_ID];
-        [archiver encodeObject: message.MessageType forKey: kMESSAGE_TYPE];
-        [archiver encodeObject: message.Destination forKey: kDESTINATION];
-        [archiver encodeObject: message.MessageBody forKey: kMESSAGE_BODY];
-        [archiver encodeObject: message.Status forKey: kSTATUS];
-        [archiver encodeObject: message.SenderName forKey: kSENDER_NAME];
-        [archiver encodeObject: message.TimeStamp forKey: kDATE_TIME];
-        [archiver encodeObject: message.Location forKey: kLOCATION];
-        
-        [archiver encodeBool: accepted forKey: kMESSAGE_WAS_ACCEPTED];
-        
-        // TESTING
-        //        [archiver encodeObject: @"12345" forKey: kMESSAGE_ID];
-        //        [archiver encodeObject: @"This is a test" forKey: kMESSAGE_BODY];
-        
-        [archiver finishEncoding];
-        
-        [self.currentSession sendDataToAllPeers: data
+    NSLog(@"Sending %@",dataString);
+    
+    if (self.currentSession.available) {  
+        [self.currentSession sendDataToAllPeers: [dataString dataUsingEncoding: NSUTF8StringEncoding]
                                    withDataMode: GKSendDataReliable
                                           error: &error];        
-        [archiver release];
     }
     
     return error;
@@ -131,31 +110,18 @@
 
 - (void) receiveData:(NSData *)data fromPeer:(NSString *)peer inSession: (GKSession *)session context:(void *)context {
     NSLog(@"receiveData");
-    if (self.currentSession.available) {        
-        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData: data];
-
+    if (self.currentSession.available) {
         OutOfBandMessage *message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
         
-        message.MessageID = [unarchiver decodeObjectForKey: kMESSAGE_ID];
-        message.HopCount = [unarchiver decodeObjectForKey: kHOP_COUNT];
-        message.SourceID = [unarchiver decodeObjectForKey: kSOURCE_ID];
-        message.MessageType = [unarchiver decodeObjectForKey: kMESSAGE_TYPE];
-        message.Destination = [unarchiver decodeObjectForKey: kDESTINATION];
-        message.MessageBody = [unarchiver decodeObjectForKey: kMESSAGE_BODY];
-        message.Status = [unarchiver decodeObjectForKey: kSTATUS];
-        message.SenderName = [unarchiver decodeObjectForKey: kSENDER_NAME];
-        message.TimeStamp = [unarchiver decodeObjectForKey: kDATE_TIME];
-        message.Location = [unarchiver decodeObjectForKey: kLOCATION];
+        NSString* string = [NSString stringWithUTF8String:[data bytes]];
+
+        [message setWithDictionaryRepresentation:(NSDictionary*)[string JSONValue]];
         
-        NSLog(@"Received %@",[message string]);
-        
-        BOOL accepted = [unarchiver decodeBoolForKey: kMESSAGE_WAS_ACCEPTED];
-        
+        NSLog(@"Received %@",string);
+
         [self.delegate networkManager: self
                       receivedMessage: message
-                          wasAccepted: accepted];
-        
-        [unarchiver release];
+                          wasAccepted: NO];
     }
 }
 

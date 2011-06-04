@@ -43,5 +43,7 @@ typedef enum
 
 
 -(NSMutableDictionary *)dictionaryRepresentation;
+-(void)setWithDictionaryRepresentation:(NSDictionary*)dictionary;
+
 -(NSString*)string;
 @end

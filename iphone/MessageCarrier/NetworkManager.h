@@ -11,17 +11,6 @@
 #import "OutOfBandMessage.h"
 
 #define kSESSION_ID @"MessageCarrier"
-#define kMESSAGE_ID @"MESSAGE_ID"
-#define kHOP_COUNT @"HOP_COUNT"
-#define kSOURCE_ID @"SOURCE_ID"
-#define kMESSAGE_TYPE @"MESSAGE_TYPE"
-#define kDESTINATION @"DESTINATION"
-#define kMESSAGE_BODY @"MESSAGE_BODY"
-#define kSTATUS @"STATUS"
-#define kMESSAGE_WAS_ACCEPTED @"MESSAGE_WAS_ACCEPTED"
-#define kSENDER_NAME @"SENDER_NAME"
-#define kDATE_TIME @"DATE_TIME"
-#define kLOCATION @"LOCATION"
 
 @class NetworkManager;
 

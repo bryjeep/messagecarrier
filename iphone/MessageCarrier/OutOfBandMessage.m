@@ -41,6 +41,19 @@
 	return dict;
 }
 
+-(void)setWithDictionaryRepresentation:(NSDictionary*)dictionary
+{
+    self.SourceID = [dictionary objectForKey: @"sourceid"];
+    self.MessageID = [dictionary objectForKey: @"destination"];
+    self.Destination = [dictionary objectForKey: @"sourceid"];
+    self.HopCount = [dictionary objectForKey: @"hopcount"];
+    self.Location = [dictionary objectForKey: @"location"];
+    self.TimeStamp = [dictionary objectForKey: @"timestamp"];
+    self.MessageType = [dictionary objectForKey: @"messagetype"];
+    self.SenderName = [dictionary objectForKey: @"sendername"];
+    self.MessageBody = [dictionary objectForKey: @"messagebody"];
+}
+
 -(NSString *) string {
     return [NSString stringWithFormat:@"Status = %@\nSourceID = %@\nMessageID=%@\nDestination=%@\nHopCount=%@\nLocation=%@\nTimeStamp=%@\nMessageType=%@\nSenderName=%@\nMessageBody=%@",self.Status,self.SourceID,self.MessageID,self.Destination,self.HopCount,self.Location,self.TimeStamp,self.MessageType,self.SenderName,self.MessageBody];
 }

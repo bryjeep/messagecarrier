@@ -14,14 +14,10 @@
 #import <CoreFoundation/CoreFoundation.h>
 #import <AddressBookUI/AddressBookUI.h>
 
-<<<<<<< HEAD
 #import "NetworkManager.h"
 #import "OutOfBandMessage.h"
 
-@interface MessageCarrierViewController : UIViewController<UITextViewDelegate,NetworkManagerDelegate> {
-=======
 @interface MessageCarrierViewController : UIViewController<UITextViewDelegate,NetworkManagerDelegate, ABPeoplePickerNavigationControllerDelegate> {
->>>>>>> 841f98b6acae4539dbe151f685e819bd1def73e5
 	UITextViewWithPlaceholder *MessageField;
     UILabel *sentCnt;
     UILabel *deliveredCnt;
