@@ -27,6 +27,6 @@
 
 -(OutOfBandMessage *) createOutOfBoundMessage;
 -(NSFetchRequest *) createFetchRequestForMessage;          
-
+-(NSFetchRequest *) createFetchRequestForMessageWithID:(NSString *) messageId;
 @end
 

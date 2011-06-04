@@ -108,23 +108,55 @@
         
         NSDictionary* dictionary = (NSDictionary*)[string JSONValue];
         if([dictionary objectForKey:@"ack"]){
-            //NSPredicate *desiredWeekPredicate = [NSPredicate predicateWithFormat:@"(currentWeek == %d)", currentWeekYouWant];
+            NSFetchRequest  *fetchRequest = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createFetchRequestForMessageWithID: [dictionary objectForKey:@"messageid"]];
+            NSManagedObjectContext * managedObjectContext = [MessageCarrierAppDelegate sharedMessageCarrierAppDelegate].managedObjectContext;
             
-            NSLog(@"Received an ACK for %@",[dictionary objectForKey:@"messageid"]);
-            [self.delegate networkManager: self
-                          receivedMessage: nil
-                              wasAccepted: YES];
+            NSError* error;
+            NSArray* results = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            if(!results){
+                NSLog(@"Error Fetching Results %@",error);
+                return;
+            }
+            if ([results count]){
+                OutOfBandMessage * message = [results objectAtIndex:0];
+                message.MessageAttempts = [NSNumber numberWithInt:[message.MessageAttempts intValue] + 1];
+                
+                if ([managedObjectContext save: &error]){
+                    NSLog(@"Received an ACK for %@",[dictionary objectForKey:@"messageid"]);
+
+                }else{
+                    NSLog(@"Error Modifying Message");
+                }
+            }
         }else{
             NSError* error;
             
-            OutOfBandMessage *message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];            
-            [message setWithDictionaryRepresentation: dictionary];
-             
-            if(![[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext] save:&error]){
-                NSLog(@"Save Error %@",error);
+            NSFetchRequest  *fetchRequest = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createFetchRequestForMessageWithID: [dictionary objectForKey:@"messageid"]];
+            NSManagedObjectContext * managedObjectContext = [MessageCarrierAppDelegate sharedMessageCarrierAppDelegate].managedObjectContext;
+            
+            NSArray* results = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            if(!results){
+                NSLog(@"Error Fetching Results %@",error);
+                return;
+            }
+            
+            if ([results count]){                
+                [self.delegate networkManager: self
+                              receivedMessage: (OutOfBandMessage *) [results objectAtIndex:0]
+                                  wasAccepted: NO];
             }else{
-                NSDictionary* ack = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:TRUE],@"ack",message.MessageID,@"messageid",nil];
-                [self.currentSession sendData:[[ack JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] toPeers:[NSArray arrayWithObject: peer] withDataMode:GKSendDataReliable error:&error];               
+                OutOfBandMessage *message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];            
+                [message setWithDictionaryRepresentation: dictionary];
+                
+                if(![[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext] save:&error]){
+                    NSLog(@"Save Error %@",error);
+                }else{
+                    [self.delegate networkManager: self
+                                  receivedMessage: message
+                                      wasAccepted: YES];
+                    NSDictionary* ack = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:TRUE],@"ack",message.MessageID,@"messageid",nil];
+                    [self.currentSession sendData:[[ack JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] toPeers:[NSArray arrayWithObject: peer] withDataMode:GKSendDataReliable error:&error];               
+                }
             }
         }
     }
