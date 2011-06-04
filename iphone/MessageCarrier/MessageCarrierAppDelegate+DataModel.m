@@ -130,7 +130,11 @@
 
 -(NSFetchRequest *) createFetchRequestForMessageWithID:(NSString *) messageId
 {
+    NSFetchRequest *fetchRequest = [self createFetchRequestForMessage];
     NSPredicate *desiredMessageID = [NSPredicate predicateWithFormat:@"(MessageID == %@)", messageId];
-    [[self createFetchRequestForMessage] setPredicate: desiredMessageID];
+    
+    [fetchRequest setPredicate: desiredMessageID];
+    
+    return fetchRequest;
 }
 @end
