@@ -16,6 +16,7 @@ ACCOUNT_TOKEN = 'cef36b0b4a8d4eb7429178443bb3a6d0'
 CALLER_ID = '+14155992671' #'+14043850750'
 
 get "/" do
+erb :index
 =begin
   t = {
     'From' => CALLER_ID,
@@ -62,7 +63,7 @@ Net::SMTP.start(smtp_host, smtp_port, smtp_domain, smtp_user, smtp_pwd, :plain) 
   smtp.send_message emailmsg, from, to
 end
 =end  
-=begin  
+=begin
 Twitter.configure do |config|
   config.consumer_key = 'S11BNOKK1uwsTFFmfTYA'
   config.consumer_secret = 'z29Ttv1OmBH0Qvo0mI6C3wLn4787lldjLMWGKdiDQ'
@@ -71,8 +72,8 @@ Twitter.configure do |config|
 end
 
 # Update your status
-Twitter.update("Hello World from the Message Carrier Team!")  
-=end  
+Twitter.update("Now tweeting with location!", {"status" => "Now with Geo Location Support!", "lat" => "33.778463", "long" => "-84.398881", "display_coordinates" => "true"})  
+=end
 end
 
 post "/messages" do
@@ -93,6 +94,33 @@ post "/messages" do
           statuses[msg['messageid']] = :error
         end
       end
+      
+	  from = 'messagecarrier@lavabit.com'
+	  to = msg['destination']
+	  smtp_host   = 'lavabit.com'
+	  smtp_port   = 25
+	  smtp_domain = 'lavabit.com'
+	  smtp_user   = 'messagecarrier'
+	  smtp_pwd    = 'rh0kATL'
+	  
+	  subject = '[MessageCarrier] Test Email'
+	  emailbody = msg['messagebody']
+	  time = Time.now
+	  emaildate = time.strftime("%a, %d %b %Y %H:%M:%S -0400")
+
+emailmsg = <<END_OF_MESSAGE
+Date: #{emaildate}
+From: #{from}
+To: #{to}
+Subject: #{subject}
+
+#{emailbody}
+END_OF_MESSAGE
+
+Net::SMTP.start(smtp_host, smtp_port, smtp_domain, smtp_user, smtp_pwd, :plain) do |smtp|
+smtp.send_message emailmsg, from, to
+end
+      
     rescue Exception => e
       statuses[msg['messageid']] = :error
     end
