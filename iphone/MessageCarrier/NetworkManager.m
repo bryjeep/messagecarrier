@@ -158,7 +158,13 @@
                                   receivedMessage: message
                                       wasAccepted: YES];
                     NSDictionary* ack = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:TRUE],@"ack",message.MessageID,@"messageid",nil];
-                    [self.currentSession sendData:[[ack JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] toPeers:[NSArray arrayWithObject: peer] withDataMode:GKSendDataReliable error:&error];               
+                    [self.currentSession sendData:[[ack JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] toPeers:[NSArray arrayWithObject: peer] withDataMode:GKSendDataReliable error:&error];
+                    
+                    if ([[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate].reach currentReachabilityStatus] != NotReachable)
+                    {
+                        NSLog(@"Sending To Server");
+                        [MessageCarrierAppDelegate serverSendMessage:message];
+                    }  
                 }
             }
         }
@@ -198,6 +204,7 @@
             NSLog(@"Unable To Connect To Peer %@", peerID);
             break;
         case GKPeerStateConnected:
+            [self sendMessageToNewClient];
             [self.delegate networkManagerConnectedPeer: self];
             NSLog(@"Connected To Peer %@", peerID);
             break;        

@@ -74,12 +74,24 @@
                                         //Message got sent
                                         dispatch_async(dispatch_get_main_queue(), ^{
                                             NSLog(@"----->Server Send Sucess");
-                                            NSError* error;
-                                            message.Status = [NSNumber numberWithUnsignedInt: SENT];
-                                            if([[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext] save:&error]){
-                                                [[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] viewController] messageDelivery];
+                                            if ([response isKindOfClass:[NSHTTPURLResponse class]])
+                                            {
+                                                NSLog(@"%@",[NSString stringWithUTF8String:[data bytes]]);
+                                                NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)response;
+                                                NSLog(@"----->Server Send Response Code %d",[(NSHTTPURLResponse*)httpResponse statusCode]);
+                                                if ([httpResponse statusCode] == 200){
+                                                    NSError* error;
+                                                    
+                                                    message.Status = [NSNumber numberWithUnsignedInt: SENT];
+                                                    
+                                                    if([[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext] save:&error]){
+                                                        [[[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] viewController] messageDelivery];
+                                                    }else{
+                                                        NSLog(@"Success Save Error %@",error);
+                                                    }
+                                               }
                                             }else{
-                                                NSLog(@"Success Save Error %@",error);
+                                                NSLog(@"----->This should be impossible");
                                             }
                                             
                                         });
