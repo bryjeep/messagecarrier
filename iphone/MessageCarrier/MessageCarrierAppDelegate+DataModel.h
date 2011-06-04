@@ -7,6 +7,7 @@
 //
 
 #import "MessageCarrierAppDelegate.h"
+
 @interface MessageCarrierAppDelegate ( DataModel )
 
 // Category Definition

@@ -6,6 +6,7 @@
 //  Copyright 2011 Georgia Institute of Technology. All rights reserved.
 //
 
+#import "MessageCarrierAppDelegate+Application.h"
 #import "MessageCarrierAppDelegate+DataModel.h"
 
 @implementation MessageCarrierAppDelegate ( DataModel )
@@ -14,7 +15,7 @@
 #pragma mark Private
 
 -(NSURL*)storeURL {
-    return [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"messages.sqlite"]];
+    return [NSURL fileURLWithPath: [[MessageCarrierAppDelegate applicationDocumentsDirectory] stringByAppendingPathComponent: @"messages.sqlite"]];
 }
 
 -(void)removeExistingStore {

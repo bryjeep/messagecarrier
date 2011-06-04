@@ -24,7 +24,7 @@
 
 static MessageCarrierAppDelegate *sharedMessageCarrierAppDelegate = nil;
 
-+ (MessageCarrierAppDelegate *)shareMessageCarrierAppDelegate
++ (MessageCarrierAppDelegate *) sharedMessageCarrierAppDelegate
 {
 	@synchronized(self)
 	{

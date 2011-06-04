@@ -15,3 +15,15 @@
 
 PUSHING LIVE (not yet)
 
+##### Message JSON API (Name : Value)
+"destination" : String #Phone number, Twitter Handle, or Email Address
+"hopcount" : Int #Number of hops between phones from sender to server
+"messagebody" : String #The message, limited 140 characters by sender
+"messageid" : Hex String #Random message id string
+"messagetype" : Int #0 = sms, 1 = email, 2 = twitter
+"sourceid" : String #sender UUID
+"status" : Int #404 = failure; 200 = successfully sent and received
+"sendername" : String #User Entered name of sender
+"location" : String #GPS coordinates, format TBD
+"timestamp" : String #format TBD
+

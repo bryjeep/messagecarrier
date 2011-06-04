@@ -6,7 +6,7 @@
 //  Copyright 2011 Georgia Institute of Technology. All rights reserved.
 //
 
-#import "JSON.h"
+#import "SBJson.h"
 #import "ServerInterfaceManager.h"
 #import "OutOfBandMessage.h"
 #import "MessageCarrierAppDelegate+DataModel.h"
@@ -21,10 +21,14 @@
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: [[[message dictionaryRepresentation] JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
     
+	NSManagedObjectContext* managedContext = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext];
+	
     [MessageCarrierAppDelegate asyncRequest:request
                                     success:^(NSData * data, NSURLResponse * response){
                                         //Message got sent
+                                        [managedContext lock];
                                         message.Status = [NSNumber numberWithUnsignedInt: SENT];
+                                        [managedContext unlock];
                                     }
                                     failure:^(NSData * data, NSError * response){
                                         //Message got sent
