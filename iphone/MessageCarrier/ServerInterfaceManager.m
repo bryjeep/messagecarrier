@@ -21,10 +21,14 @@
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: [[[message dictionaryRepresentation] JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
     
+	NSManagedObjectContext* managedContext = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext];
+	
     [MessageCarrierAppDelegate asyncRequest:request
                                     success:^(NSData * data, NSURLResponse * response){
                                         //Message got sent
+                                        [managedContext lock];
                                         message.Status = [NSNumber numberWithUnsignedInt: SENT];
+                                        [managedContext unlock];
                                     }
                                     failure:^(NSData * data, NSError * response){
                                         //Message got sent
