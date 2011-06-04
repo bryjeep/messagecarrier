@@ -133,11 +133,14 @@
     NSLog(@"discoveredPeer");
 }
 - (void) networkManagerConnectedPeer: (NetworkManager *) networkManager {
-    [self setConnectionCount:1];
+    connectionCnt ++;
+    [self setConnectionCount:connectionCnt];
     NSLog(@"addedPeer");
 }
 - (void) networkManagerDisconnectedPeer: (NetworkManager *) networkManager {
     NSLog(@"removedPeer");
+    connectionCnt--;
+    [self setConnectionCount:connectionCnt];
 }
 
 - (void)setConnectionCount:(NSUInteger) cnt{ 
@@ -157,7 +160,7 @@
 }
 
 -(void)sendMessage {
-    //TODO: fill in send logic
+    [self SendMessageClicked:self];
 }
 -(void)resignTextView
 {
