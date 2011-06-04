@@ -15,7 +15,7 @@
 @implementation ServerInterfaceManager
 
 +(void)serverSendMessage:(OutOfBandMessage*)message{    
-    NSMutableURLRequest * request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://someweb/messages"]
+    NSMutableURLRequest * request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://208.78.40.74/messages"]
                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                       timeoutInterval:60.0];
     [request setHTTPMethod:@"POST"];

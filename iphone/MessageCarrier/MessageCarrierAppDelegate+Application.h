@@ -20,7 +20,6 @@
 //   You should put the instance variables and sythesized properties definition in MessageCarrierAppDelegate.h
 //   You should @synthesize the properties in MessageCarrierAppDelegate.m
 
-
 +(NSString *)applicationDocumentsDirectory;
 @end
 

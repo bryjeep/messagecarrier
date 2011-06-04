@@ -29,7 +29,6 @@
 		377180E513998A9F00A9305D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 377180E313998A9F00A9305D /* Model.xcdatamodeld */; };
 		3785D82B1399A2FE00201B8D /* MessageCarrierAppDelegate+DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3785D82A1399A2FD00201B8D /* MessageCarrierAppDelegate+DataModel.m */; };
 		3785D8371399AC4400201B8D /* MessageCarrierAppDelegate+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3785D8361399AC4400201B8D /* MessageCarrierAppDelegate+Utility.m */; };
-		3785D8431399B4A300201B8D /* ServerInterfaceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3785D8421399B4A300201B8D /* ServerInterfaceManager.m */; };
 		37D8B6701399BC5100B3D0F5 /* OutOfBandMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B66F1399BC5100B3D0F5 /* OutOfBandMessage.m */; };
 		37D8B68E1399C38500B3D0F5 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B6761399C38500B3D0F5 /* NSObject+SBJson.m */; };
 		37D8B68F1399C38500B3D0F5 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B6791399C38500B3D0F5 /* SBJsonParser.m */; };
@@ -43,7 +42,9 @@
 		37D8B6971399C38500B3D0F5 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B6891399C38500B3D0F5 /* SBJsonTokeniser.m */; };
 		37D8B6981399C38500B3D0F5 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B68B1399C38500B3D0F5 /* SBJsonUTF8Stream.m */; };
 		37D8B6991399C38500B3D0F5 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B68D1399C38500B3D0F5 /* SBJsonWriter.m */; };
-		37D8B7081399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8B7071399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m */; };
+		6C13CA59139A323F00226B59 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C13CA56139A323F00226B59 /* Reachability.m */; };
+		6C13CA5C139A35D300226B59 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C13CA5B139A35D300226B59 /* SystemConfiguration.framework */; };
+		6C13CA5E139A45DA00226B59 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C13CA5D139A45DA00226B59 /* CoreLocation.framework */; };
 		6C74F9351399EC3300A2DB22 /* action-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C74F9331399EC3300A2DB22 /* action-normal.png */; };
 		6C74F9361399EC3300A2DB22 /* action-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C74F9341399EC3300A2DB22 /* action-pressed.png */; };
 		6C74F93A1399F10B00A2DB22 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C74F9381399F10B00A2DB22 /* AddressBook.framework */; };
@@ -96,8 +97,6 @@
 		3785D82A1399A2FD00201B8D /* MessageCarrierAppDelegate+DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MessageCarrierAppDelegate+DataModel.m"; sourceTree = "<group>"; };
 		3785D8351399AC4400201B8D /* MessageCarrierAppDelegate+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MessageCarrierAppDelegate+Utility.h"; sourceTree = "<group>"; };
 		3785D8361399AC4400201B8D /* MessageCarrierAppDelegate+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MessageCarrierAppDelegate+Utility.m"; sourceTree = "<group>"; };
-		3785D8411399B4A300201B8D /* ServerInterfaceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerInterfaceManager.h; sourceTree = "<group>"; };
-		3785D8421399B4A300201B8D /* ServerInterfaceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerInterfaceManager.m; sourceTree = "<group>"; };
 		37D8B66E1399BC5100B3D0F5 /* OutOfBandMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutOfBandMessage.h; sourceTree = "<group>"; };
 		37D8B66F1399BC5100B3D0F5 /* OutOfBandMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutOfBandMessage.m; sourceTree = "<group>"; };
 		37D8B6741399C38500B3D0F5 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -126,8 +125,10 @@
 		37D8B68B1399C38500B3D0F5 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		37D8B68C1399C38500B3D0F5 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		37D8B68D1399C38500B3D0F5 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		37D8B7061399CD2B00B3D0F5 /* MessageCarrierAppDelegate+Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MessageCarrierAppDelegate+Application.h"; sourceTree = "<group>"; };
-		37D8B7071399CD2C00B3D0F5 /* MessageCarrierAppDelegate+Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MessageCarrierAppDelegate+Application.m"; sourceTree = "<group>"; };
+		6C13CA55139A323F00226B59 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = "<group>"; };
+		6C13CA56139A323F00226B59 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
+		6C13CA5B139A35D300226B59 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6C13CA5D139A45DA00226B59 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6C74F9331399EC3300A2DB22 /* action-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-normal.png"; sourceTree = "<group>"; };
 		6C74F9341399EC3300A2DB22 /* action-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-pressed.png"; sourceTree = "<group>"; };
 		6C74F9381399F10B00A2DB22 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -144,6 +145,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C13CA5E139A45DA00226B59 /* CoreLocation.framework in Frameworks */,
+				6C13CA5C139A35D300226B59 /* SystemConfiguration.framework in Frameworks */,
 				6C74F93A1399F10B00A2DB22 /* AddressBook.framework in Frameworks */,
 				6C74F93B1399F10B00A2DB22 /* AddressBookUI.framework in Frameworks */,
 				17AC01F813999C1100ABADAC /* CoreData.framework in Frameworks */,
@@ -170,6 +173,8 @@
 		17659FC313997FC8009DF548 = {
 			isa = PBXGroup;
 			children = (
+				6C13CA5D139A45DA00226B59 /* CoreLocation.framework */,
+				6C13CA5B139A35D300226B59 /* SystemConfiguration.framework */,
 				6C74F9421399FFEE00A2DB22 /* icon@2x.png */,
 				6C74F9401399FFE100A2DB22 /* icon.png */,
 				6C74F9381399F10B00A2DB22 /* AddressBook.framework */,
@@ -225,8 +230,6 @@
 				17659FE713997FC8009DF548 /* MessageCarrierViewController.h */,
 				17659FE813997FC8009DF548 /* MessageCarrierViewController.m */,
 				17659FEA13997FC8009DF548 /* MessageCarrierViewController.xib */,
-				3785D8411399B4A300201B8D /* ServerInterfaceManager.h */,
-				3785D8421399B4A300201B8D /* ServerInterfaceManager.m */,
 				17659FD913997FC8009DF548 /* Supporting Files */,
 			);
 			path = MessageCarrier;
@@ -299,6 +302,8 @@
 		6CED60F91399E10C00103320 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6C13CA55139A323F00226B59 /* Reachability.h */,
+				6C13CA56139A323F00226B59 /* Reachability.m */,
 				6CED60FB1399E13B00103320 /* UITextViewWithPlaceholder.h */,
 				6CED60FC1399E13B00103320 /* UITextViewWithPlaceholder.m */,
 			);
@@ -433,7 +438,6 @@
 				3785D82B1399A2FE00201B8D /* MessageCarrierAppDelegate+DataModel.m in Sources */,
 				3785D8371399AC4400201B8D /* MessageCarrierAppDelegate+Utility.m in Sources */,
 				179717E01399D37800A5D3CA /* MessageCarrierAppDelegate+Application.m in Sources */,
-				3785D8431399B4A300201B8D /* ServerInterfaceManager.m in Sources */,
 				37D8B6701399BC5100B3D0F5 /* OutOfBandMessage.m in Sources */,
 				37D8B68E1399C38500B3D0F5 /* NSObject+SBJson.m in Sources */,
 				37D8B68F1399C38500B3D0F5 /* SBJsonParser.m in Sources */,
@@ -448,6 +452,7 @@
 				37D8B6981399C38500B3D0F5 /* SBJsonUTF8Stream.m in Sources */,
 				37D8B6991399C38500B3D0F5 /* SBJsonWriter.m in Sources */,
 				6CED60FD1399E13B00103320 /* UITextViewWithPlaceholder.m in Sources */,
+				6C13CA59139A323F00226B59 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +552,7 @@
 				GCC_PREFIX_HEADER = "MessageCarrier/MessageCarrier-Prefix.pch";
 				INFOPLIST_FILE = "MessageCarrier/MessageCarrier-Info.plist";
 				PRODUCT_NAME = MsgCarrier;
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

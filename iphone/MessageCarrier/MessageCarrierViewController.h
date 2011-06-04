@@ -13,13 +13,14 @@
 #import <AddressBook/AddressBook.h>
 #import <CoreFoundation/CoreFoundation.h>
 #import <AddressBookUI/AddressBookUI.h>
-
+#import <CoreLocation/CoreLocation.h>
 #import "NetworkManager.h"
 #import "OutOfBandMessage.h"
 
-@interface MessageCarrierViewController : UIViewController<UITextViewDelegate,NetworkManagerDelegate, ABPeoplePickerNavigationControllerDelegate> {
+@interface MessageCarrierViewController : UIViewController<UITextViewDelegate,NetworkManagerDelegate, ABPeoplePickerNavigationControllerDelegate, CLLocationManagerDelegate> {
 	UITextViewWithPlaceholder *MessageField;
     UILabel *sentCnt;
+    CLLocationManager *locationManager;
     UILabel *deliveredCnt;
     UILabel *carriedCnt;
     UIButton *sendMessageBtn;
@@ -31,6 +32,7 @@
     NSUInteger sentNbr;
     NSUInteger carriedNbr;
     NSUInteger deliveredNbr;
+    CLLocation *location;
 #pragma mark -
     NetworkManager *networkManager;
     OutOfBandMessage *message;
@@ -55,4 +57,7 @@
 - (IBAction)SendMessageClicked:(id)sender;
 - (IBAction)MessageTypeChanged:(id)sender;
 - (void)setConnectionCount:(NSUInteger) cnt;
+
+- (void) messageDelivery;
+
 @end

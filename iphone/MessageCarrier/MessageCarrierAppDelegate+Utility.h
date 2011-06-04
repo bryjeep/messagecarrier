@@ -7,6 +7,7 @@
 //
 
 #import "MessageCarrierAppDelegate.h"
+#import "Reachability.h"
 
 @interface MessageCarrierAppDelegate ( Utilty )
 
@@ -19,6 +20,8 @@
 //   You should @synthesize the properties in MessageCarrierAppDelegate.m
 
 + (NSString *)createUUID;
++ (void)serverSendMessage:(OutOfBandMessage*)message;
 + (void)asyncRequest:(NSURLRequest *)request success:(void(^)(NSData *,NSURLResponse *))successBlock failure:(void(^)(NSData *,NSError *))failureBlock;
+- (void) reachabilityChanged: (NSNotification* )note;
 
 @end
