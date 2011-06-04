@@ -19,8 +19,19 @@ post "/messages" do
     messages = [messages]
   end
   messages.each do |msg|
-    database[:messages].insert(msg)
-    statuses[msg['id']] = :accepted
+    begin
+      if database[:messages].where(:id => msg['id']).first
+        statuses[msg['id']] = :existing
+      else
+        if database[:messages].insert(msg)
+          statuses[msg['id']] = :accepted
+        else
+          statuses[msg['id']] = :error
+        end
+      end
+    rescue Exception => e
+      statuses[msg['id']] = :error
+    end
   end
   Yajl::Encoder.encode(statuses)
 end
