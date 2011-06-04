@@ -15,8 +15,8 @@
 @implementation MessageCarrierViewController
 @synthesize charCounter;
 @synthesize chooseContact;
-@synthesize MessageField, sentCnt, deliveredCnt, carriedCnt, sendMessageBtn, toField, messageType;
-@synthesize connectionLabel;
+@synthesize MessageField, sentCnt, deliveredCnt, carriedCnt, sendMessageBtn, toField, messageType, locationManager;
+@synthesize connectionLabel, coords;
 
 @synthesize networkManager;
 @synthesize message;
@@ -136,7 +136,7 @@
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    location = newLocation;
+    self.coords = newLocation.coordinate;
     [locationManager stopUpdatingLocation];
 }
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -275,7 +275,9 @@
     self.message.Destination    = self.toField.text;
     self.message.MessageID      = [MessageCarrierAppDelegate createUUID];
     self.message.HopCount       = [NSNumber numberWithInt: 0];
-    self.message.Location       = [NSString stringWithFormat:@"%d,%d", location.coordinate.longitude, location.coordinate.latitude ];
+    if (self.locationManager) {
+        self.message.Location       = [NSString stringWithFormat:@"%f,%f", self.coords.latitude, self.coords.longitude];
+    }
     self.message.TimeStamp      = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     
     self.message.MessageType    = [NSNumber numberWithInt: [self.messageType selectedSegmentIndex]];

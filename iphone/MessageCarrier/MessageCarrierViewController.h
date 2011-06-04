@@ -32,7 +32,7 @@
     NSUInteger sentNbr;
     NSUInteger carriedNbr;
     NSUInteger deliveredNbr;
-    CLLocation *location;
+    CLLocationCoordinate2D coords;
 #pragma mark -
     NetworkManager *networkManager;
     OutOfBandMessage *message;
@@ -51,6 +51,8 @@
 
 @property (nonatomic, retain) NetworkManager *networkManager;
 @property (nonatomic, retain) OutOfBandMessage* message;
+@property (nonatomic, retain) CLLocationManager* locationManager;
+@property (nonatomic) CLLocationCoordinate2D coords;
 
 - (IBAction)choseContactTouch:(id)sender;
 -(void)sendMessage;
