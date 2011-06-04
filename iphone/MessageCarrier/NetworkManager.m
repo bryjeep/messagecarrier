@@ -26,10 +26,10 @@
     self = [super init];
     
     if (self) {
-        self.currentSession = [[GKSession alloc] initWithSessionID: SESSION_ID
+        self.currentSession = [[GKSession alloc] initWithSessionID: kSESSION_ID
                                                        displayName: nil 
                                                        sessionMode: GKSessionModePeer];
-        
+        self.currentSession.delegate = self;
         [self.currentSession setDataReceiveHandler: self
                                        withContext: nil];
     }
@@ -88,24 +88,30 @@
 }
 
 - (void) receiveData:(NSData *)data fromPeer:(NSString *)peer inSession: (GKSession *)session context:(void *)context {
+    NSLog(@"receiveDate");
     if (self.currentSession.available) {        
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData: data];
         
         OutOfBandMessage *message = [[OutOfBandMessage alloc] init];
         
-        message.MessageID = [unarchiver decodeObjectForKey: MESSAGE_ID];
-        message.HopCount = [unarchiver decodeObjectForKey: HOP_COUNT];
-        message.SourceID = [unarchiver decodeObjectForKey: SOURCE_ID];
-        message.MessageType = [unarchiver decodeObjectForKey: MESSAGE_TYPE];
-        message.Destination = [unarchiver decodeObjectForKey: DESTINATION];
-        message.MessageBody = [unarchiver decodeObjectForKey: MESSAGE_BODY];
-        message.Status = [unarchiver decodeObjectForKey: STATUS];
+//        message.MessageID = [unarchiver decodeObjectForKey: kMESSAGE_ID];
+//        message.HopCount = [unarchiver decodeObjectForKey: kHOP_COUNT];
+//        message.SourceID = [unarchiver decodeObjectForKey: kSOURCE_ID];
+//        message.MessageType = [unarchiver decodeObjectForKey: kMESSAGE_TYPE];
+//        message.Destination = [unarchiver decodeObjectForKey: kDESTINATION];
+//        message.MessageBody = [unarchiver decodeObjectForKey: kMESSAGE_BODY];
+//        message.Status = [unarchiver decodeObjectForKey: kSTATUS];
+//        message.SenderName = [unarchiver decodeObjectForKey: kSENDER_NAME];
+//        message.TimeStamp = [unarchiver decodeObjectForKey: kDATE_TIME];
+//        message.Location = [unarchiver decodeObjectForKey: kLOCATION];
 
-//#define SENDER_NAME @"SENDER_NAME"
-//#define DATE_TIME @"DATE_TIME"
-//#define LOCATION @"LOCATION"
-
-        BOOL accepted = [unarchiver decodeBoolForKey: MESSAGE_WAS_ACCEPTED];
+        // TESTING
+        NSString *id = [unarchiver decodeObjectForKey: kMESSAGE_ID];
+        NSString *body = [unarchiver decodeObjectForKey: kMESSAGE_BODY];
+        
+        NSLog(@"ID: %@, Body: %@", id, body);
+        
+        BOOL accepted = [unarchiver decodeBoolForKey: kMESSAGE_WAS_ACCEPTED];
         
         [self.delegate networkManager: self
                       receivedMessage: message
@@ -116,6 +122,10 @@
 }
 
 #pragma mark - Action Methods
+- (NSError *) sendMessage: (OutOfBandMessage *) message {
+    return [self sendMessage: message asAccepted: NO];
+}
+
 - (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted {
     NSError *error = nil;
 
@@ -123,29 +133,39 @@
         NSMutableData *data = [[NSMutableData alloc] init];
         NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData: data];
         
-        [archiver encodeObject: message.MessageID forKey: MESSAGE_ID];
-        [archiver encodeObject: message.HopCount forKey: HOP_COUNT];
-        [archiver encodeObject: message.SourceID forKey: SOURCE_ID];
-        [archiver encodeObject: message.MessageType forKey: MESSAGE_TYPE];
-        [archiver encodeObject: message.Destination forKey: DESTINATION];
-        [archiver encodeObject: message.MessageBody forKey: MESSAGE_BODY];
-        [archiver encodeObject: message.Status forKey: STATUS];
-        
-//#define SENDER_NAME @"SENDER_NAME"
-//#define DATE_TIME @"DATE_TIME"
-//#define LOCATION @"LOCATION"
+//        [archiver encodeObject: message.MessageID forKey: kMESSAGE_ID];
+//        [archiver encodeObject: message.HopCount forKey: kHOP_COUNT];
+//        [archiver encodeObject: message.SourceID forKey: kSOURCE_ID];
+//        [archiver encodeObject: message.MessageType forKey: kMESSAGE_TYPE];
+//        [archiver encodeObject: message.Destination forKey: kDESTINATION];
+//        [archiver encodeObject: message.MessageBody forKey: kMESSAGE_BODY];
+//        [archiver encodeObject: message.Status forKey: kSTATUS];
+//        [archiver encodeObject: message.SenderName forKey: kSENDER_NAME];
+//        [archiver encodeObject: message.TimeStamp forKey: kDATE_TIME];
+//        [archiver encodeObject: message.Location forKey: kLOCATION];
+//
+//        [archiver encodeBool: accepted forKey: kMESSAGE_WAS_ACCEPTED];
 
-        [archiver encodeBool: accepted forKey: MESSAGE_WAS_ACCEPTED];
-         
+        // TESTING
+        [archiver encodeObject: @"12345" forKey: kMESSAGE_ID];
+        [archiver encodeObject: @"This is a test" forKey: kMESSAGE_BODY];
+        
         [archiver finishEncoding];
         
-        [self.currentSession sendDataToAllPeers: data
-                                   withDataMode: GKSendDataReliable
-                                          error: &error];
+//        [self.currentSession sendDataToAllPeers: data
+//                                   withDataMode: GKSendDataReliable
+//                                          error: &error];
         
-        if (!error) {
-            [self.delegate networkManager: self
-                              sentMessage: message];
+        for (NSString *peerID in self.peers) {
+            [self.currentSession sendData: data
+                                  toPeers: [NSArray arrayWithObject: peerID]
+                             withDataMode: GKSendDataReliable
+                                    error: &error];
+            
+            if (!error) {
+                [self.delegate networkManager: self
+                                  sentMessage: message];
+            }
         }
         
         [archiver release];
@@ -155,7 +175,7 @@
 }
 
 - (NSArray *) localPeers {
-    return [self.currentSession peersWithConnectionState: GKSessionModePeer];
+    return [self.currentSession peersWithConnectionState: GKPeerStateAvailable];
 }
 
 - (BOOL) peersNearby {
@@ -163,7 +183,7 @@
     
     NSArray *localPeers = [self localPeers];
 
-    NSLog(@"Peers: %@", localPeers);
+//    NSLog(@"Peers: %@", localPeers);
     
     if (![self.peers isEqualToArray: localPeers]) {
         self.peers = localPeers;
