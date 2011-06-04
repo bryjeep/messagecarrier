@@ -155,7 +155,7 @@
                                   receivedMessage: message
                                       wasAccepted: YES];
                     NSDictionary* ack = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:TRUE],@"ack",message.MessageID,@"messageid",nil];
-                    [self.currentSession sendData:[[ack JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] toPeers:[NSArray arrayWithObject: peer] withDataMode:GKSendDataReliable error:&error];               
+                    [self.currentSession sendData:[[ack JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] toPeers:[NSArray arrayWithObject: peer] withDataMode:GKSendDataReliable error:&error];
                 }
             }
         }
