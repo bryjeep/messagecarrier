@@ -11,7 +11,6 @@
 @interface NetworkManager ()
 
 @property (nonatomic, retain) NSTimer *timer;
-@property (nonatomic, assign) BOOL shouldProcessData;
 @property (nonatomic, retain) GKSession *currentSession;
 @property (nonatomic, retain) NSArray *peers;
 @end;
@@ -20,7 +19,6 @@
 
 @synthesize currentSession;
 @synthesize delegate;
-@synthesize shouldProcessData;
 @synthesize timer;
 @synthesize peers;
 
@@ -36,8 +34,6 @@
                                        withContext: nil];
     }
     
-    self.shouldProcessData = NO;
-    
     return self;
 }
 
@@ -50,35 +46,37 @@
     [super dealloc];
 }
 
-- (BOOL) startup {
-    self.shouldProcessData = YES;
+- (void) checkForPeers {
+    if ([self peersNearby]) {
+        [self.delegate networkManagerDiscoveredPeers: self];
+    }
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval: 5.0
+    self.timer = [NSTimer scheduledTimerWithTimeInterval: 10.0
                                                   target: self
                                                 selector: @selector(checkForPeers)
                                                 userInfo: nil
                                                  repeats: YES];
+}
+
+- (BOOL) startup {
+    self.currentSession.available = YES;
+    
+    [self checkForPeers];
     
     return YES;
 }
 
 - (void)shutdown {
-    self.shouldProcessData = NO;
     [self.timer invalidate];
-    self.timer = nil;
     
+    self.currentSession.available = NO;
+    
+    self.timer = nil;
     self.currentSession = nil;
 }
 
-- (void) checkForPeers {
-    if ([self peersNearby]) {
-        [self.delegate networkManagerDiscoveredPeers: self];
-    }
-}
-
 - (void) receiveData:(NSData *)data fromPeer:(NSString *)peer inSession: (GKSession *)session context:(void *)context {
-    if (self.shouldProcessData) {
-        
+    if (self.currentSession.available) {        
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData: data];
         
         Message *message = [[Message alloc] init];
@@ -109,7 +107,7 @@
 - (NSError *) sendMessage: (Message *) message asAccepted: (BOOL) accepted {
     NSError *error = nil;
 
-    if (self.shouldProcessData) {
+    if (self.currentSession.available) {
         NSMutableData *data = [[NSMutableData alloc] init];
         NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData: data];
         
@@ -152,8 +150,8 @@
     NSInteger count = 0;
     
     NSArray *localPeers = [self localPeers];
-    //TODO
-    if (self.peers != localPeers) {
+
+    if (![self.peers isEqualToArray: localPeers]) {
         self.peers = localPeers;
         
         count = [localPeers count];
@@ -166,7 +164,7 @@
 /* Indicates a state change for the given peer.
  */
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
-    
+    NSLog(@"%@ didChangeState: %d", peerID, state);
 }
 
 /* Indicates a connection request was received from another peer. 
@@ -176,7 +174,7 @@
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID {
     NSError *error = nil;
     
-    if (self.shouldProcessData) {
+    if (self.currentSession.available) {
         [session acceptConnectionFromPeer: peerID
                                     error: &error];
     }
@@ -185,10 +183,10 @@
 /* Indicates a connection error occurred with a peer, which includes connection request failures, or disconnects due to timeouts.
  */
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error {
-    
+    NSLog(@"connectionWithPeerFailed: %@, %@", peerID, error);
 }
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error {
-    
+    NSLog(@"didFailWithError: %@", error);
 }
 @end
