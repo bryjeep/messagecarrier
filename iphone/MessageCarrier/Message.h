@@ -24,4 +24,6 @@
 @property (nonatomic, retain) NSString * Location;
 @property (nonatomic, retain) NSString * TimeStamp;
 
+-(NSMutableDictionary *)dictionaryRepresentation;
+
 @end
