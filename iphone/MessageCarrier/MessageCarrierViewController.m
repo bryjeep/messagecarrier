@@ -7,14 +7,23 @@
 //
 
 #import "MessageCarrierViewController.h"
+#import "UITextViewWithPlaceholder.h"
 
 @implementation MessageCarrierViewController
+@synthesize MessageField, sentCnt, deliveredCnt, carriedCnt, sendMessageBtn, toField, messageType;
 
 @synthesize networkManager;
 
 - (void)dealloc
 {
     [super dealloc];
+    [self.MessageField dealloc];
+    [self.sentCnt dealloc];
+    [self.deliveredCnt dealloc];
+    [self.carriedCnt dealloc];
+    [self.sendMessageBtn dealloc];
+    [self.toField dealloc];
+    [self.messageType dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -27,10 +36,51 @@
 
 #pragma mark - View lifecycle
 
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.MessageField resignFirstResponder];
+    [self.toField resignFirstResponder];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.MessageField.layer setBorderColor: [[UIColor grayColor] CGColor]];
+    [self.MessageField.layer setBorderWidth: 1.0];
+    [self.MessageField.layer setCornerRadius:8.0f];
+    [self.MessageField.layer setMasksToBounds:YES];
+    [self.MessageField setClipsToBounds:YES];
+    
+    self.MessageField.delegate = self;
+    self.MessageField.placeholder = @"enter your message";
+    
+    self.sentCnt.text = [[NSNumber numberWithInt:0] stringValue];
+    self.deliveredCnt.text = [[NSNumber numberWithInt:0] stringValue];
+    self.carriedCnt.text = [[NSNumber numberWithInt:0] stringValue];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    if (textField == self.toField) {
+        [self.MessageField becomeFirstResponder];
+    }
+	
+    return YES;
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    // Any new character added is passed in as the "text" parameter
+    if ([text isEqualToString:@"\n"]) {
+        // Be sure to test for equality using the "isEqualToString" message
+        [textView resignFirstResponder];
+        if (textView == self.MessageField) {
+            [self sendMessage];
+        }
+        // Return FALSE so that the final '\n' character doesn't get added
+        return FALSE;
+    }
+    // For any other character return TRUE so that the text gets added to the view
+    return TRUE;
 }
 
 - (void) networkManager: (NetworkManager *) networkManager sentMessage: (OutOfBandMessage *) message {
@@ -58,6 +108,13 @@
     [picker show];    
 }
 
+-(void)sendMessage {
+    //TODO: fill in send logic
+}
+-(void)resignTextView
+{
+	[self.MessageField resignFirstResponder];
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -71,4 +128,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)SendMessageClicked:(id)sender {
+}
+
+- (IBAction)MessageTypeChanged:(id)sender {
+}
 @end
