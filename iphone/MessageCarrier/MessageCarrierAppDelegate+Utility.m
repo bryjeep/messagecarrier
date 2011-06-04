@@ -6,11 +6,12 @@
 //  Copyright 2011 Georgia Institute of Technology. All rights reserved.
 //
 
+#import "MessageCarrierAppDelegate+DataModel.h"
 #import "MessageCarrierAppDelegate+Utility.h"
 
 @implementation MessageCarrierAppDelegate ( Utility )
 
-- (NSString *)createUUID
++ (NSString *)createUUID
 {
     // Create universally unique identifier (object)
     CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
@@ -32,4 +33,22 @@
     return uuidStr;
 }
 
++ (void)asyncRequest:(NSURLRequest *)request success:(void(^)(NSData *,NSURLResponse *))successBlock failure:(void(^)(NSData *,NSError *))failureBlock
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        NSURLResponse *response = nil;
+        NSError *error = nil;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if (error) {
+            failureBlock(data,error);
+        } else {
+            successBlock(data,response);
+        }
+        
+        [pool release];
+    });
+}
 @end

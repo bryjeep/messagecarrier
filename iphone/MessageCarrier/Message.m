@@ -10,12 +10,15 @@
 
 
 @implementation Message
-@dynamic MessageID;
+@dynamic Status;
+@dynamic MessageBody;
+@dynamic Destination;
 @dynamic HopCount;
 @dynamic SourceID;
+@dynamic MessageID;
 @dynamic MessageType;
-@dynamic Destination;
-@dynamic MessageBody;
-@dynamic Status;
+@dynamic SenderName;
+@dynamic Location;
+@dynamic TimeStamp;
 
 @end
