@@ -107,13 +107,16 @@
         
         NSString* string = [NSString stringWithUTF8String:[data bytes]];
 
-        [message setWithDictionaryRepresentation:(NSDictionary*)[string JSONValue]];
+        NSDictionary* dictionary = (NSDictionary*)[string JSONValue];
+        if([dictionary objectForKey:@"ACK"]){
+            [self.delegate networkManager: self
+                          receivedMessage: message
+                              wasAccepted: YES];
+        }else{
+            [message setWithDictionaryRepresentation: dictionary];
         
-        NSLog(@"Received %@",string);
-
-        [self.delegate networkManager: self
-                      receivedMessage: message
-                          wasAccepted: NO];
+            NSLog(@"Received %@",string);
+        }
     }
 }
 
