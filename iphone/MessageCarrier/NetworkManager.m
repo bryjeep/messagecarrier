@@ -81,7 +81,7 @@
         
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData: data];
         
-        Message *message = [[Message alloc] init];
+        OutOfBandMessage *message = [[OutOfBandMessage alloc] init];
         
         message.MessageID = [unarchiver decodeObjectForKey: MESSAGE_ID];
         message.HopCount = [unarchiver decodeObjectForKey: HOP_COUNT];
@@ -106,7 +106,7 @@
 }
 
 #pragma mark - Action Methods
-- (NSError *) sendMessage: (Message *) message asAccepted: (BOOL) accepted {
+- (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted {
     NSError *error = nil;
 
     if (self.shouldProcessData) {

@@ -9,7 +9,6 @@
 
 #import "MessageCarrierAppDelegate.h"
 #import "MessageCarrierAppDelegate+Application.h"
-#import "MessageCarrierViewController.h"
 
 @implementation MessageCarrierAppDelegate ( Application )
 

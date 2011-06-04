@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Message.h"
+#import "OutOfBandMessage.h"
 
 @interface ServerInterfaceManager : NSObject {
     
 }
 
-+(void)serverSendMessage:(Message*)message;
++(void)serverSendMessage:(OutOfBandMessage*)message;
 
 @end

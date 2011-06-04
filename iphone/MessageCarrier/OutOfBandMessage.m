@@ -9,7 +9,7 @@
 #import "OutOfBandMessage.h"
 
 
-@implementation Message
+@implementation OutOfBandMessage
 @dynamic Status;
 
 @dynamic SourceID;

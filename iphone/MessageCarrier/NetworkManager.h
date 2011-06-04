@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
-#import "Message.h"
+#import "OutOfBandMessage.h"
 
 #define SESSION_ID @"MessageCarrier"
 #define MESSAGE_ID @"MESSAGE_ID"
@@ -27,8 +27,8 @@
 
 @protocol NetworkManagerDelegate <NSObject>
 
-- (void) networkManager: (NetworkManager *) networkManager sentMessage: (Message *) message;
-- (void) networkManager: (NetworkManager *) networkManager receivedMessage: (Message *) message wasAccepted: (BOOL) accepted;
+- (void) networkManager: (NetworkManager *) networkManager sentMessage: (OutOfBandMessage *) message;
+- (void) networkManager: (NetworkManager *) networkManager receivedMessage: (OutOfBandMessage *) message wasAccepted: (BOOL) accepted;
 - (void) networkManagerDiscoveredPeers: (NetworkManager *) networkManager;
 @end
 
@@ -40,6 +40,6 @@
 
 - (BOOL) startup;
 - (void) shutdown;
-- (NSError *) sendMessage: (Message *) message asAccepted: (BOOL) accepted;
+- (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted;
 - (BOOL) peersNearby;
 @end
