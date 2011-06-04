@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#import "MessageCarrierViewController.h"
+
 @class MessageCarrierViewController;
 
 @interface MessageCarrierAppDelegate : NSObject <UIApplicationDelegate> {

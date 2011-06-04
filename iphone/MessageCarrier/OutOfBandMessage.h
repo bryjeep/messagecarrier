@@ -25,7 +25,7 @@ typedef enum
     
 } MESSAGE_STATUS;
 
-@interface Message : NSManagedObject {
+@interface OutOfBandMessage : NSManagedObject {
 @private
 }
 @property (nonatomic, retain) NSNumber * Status;

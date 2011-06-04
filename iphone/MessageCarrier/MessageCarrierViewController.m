@@ -35,11 +35,11 @@
 }
 */
 
-- (void) networkManager: (NetworkManager *) networkManager sentMessage: (Message *) message {
+- (void) networkManager: (NetworkManager *) networkManager sentMessage: (OutOfBandMessage *) message {
     NSLog(@"sentMessage");
 }
 
-- (void) networkManager: (NetworkManager *) networkManager receivedMessage: (Message *) message wasAccepted: (BOOL) accepted {
+- (void) networkManager: (NetworkManager *) networkManager receivedMessage: (OutOfBandMessage *) message wasAccepted: (BOOL) accepted {
     NSLog(@"receivedMessage");
 }
 

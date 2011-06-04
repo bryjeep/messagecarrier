@@ -8,13 +8,13 @@
 
 #import "JSON.h"
 #import "ServerInterfaceManager.h"
-#import "Message.h"
+#import "OutOfBandMessage.h"
 #import "MessageCarrierAppDelegate+DataModel.h"
 #import "MessageCarrierAppDelegate+Utility.h"
 
 @implementation ServerInterfaceManager
 
-+(void)serverSendMessage:(Message*)message{    
++(void)serverSendMessage:(OutOfBandMessage*)message{    
     NSMutableURLRequest * request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://someweb/messages"]
                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                       timeoutInterval:60.0];
