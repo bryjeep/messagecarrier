@@ -65,7 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		17659FCE13997FC8009DF548 /* MessageCarrier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessageCarrier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17659FCE13997FC8009DF548 /* MsgCarrier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MsgCarrier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17659FD213997FC8009DF548 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		17659FD413997FC8009DF548 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		17659FD613997FC8009DF548 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -186,7 +186,7 @@
 		17659FCF13997FC8009DF548 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				17659FCE13997FC8009DF548 /* MessageCarrier.app */,
+				17659FCE13997FC8009DF548 /* MsgCarrier.app */,
 				17659FF213997FC8009DF548 /* MessageCarrierTests.octest */,
 			);
 			name = Products;
@@ -334,7 +334,7 @@
 			);
 			name = MessageCarrier;
 			productName = MessageCarrier;
-			productReference = 17659FCE13997FC8009DF548 /* MessageCarrier.app */;
+			productReference = 17659FCE13997FC8009DF548 /* MsgCarrier.app */;
 			productType = "com.apple.product-type.application";
 		};
 		17659FF113997FC8009DF548 /* MessageCarrierTests */ = {
@@ -549,7 +549,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MessageCarrier/MessageCarrier-Prefix.pch";
 				INFOPLIST_FILE = "MessageCarrier/MessageCarrier-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MsgCarrier;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -562,7 +562,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MessageCarrier/MessageCarrier-Prefix.pch";
 				INFOPLIST_FILE = "MessageCarrier/MessageCarrier-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MsgCarrier;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

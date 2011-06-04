@@ -102,7 +102,7 @@
         self.charCounter.hidden = FALSE;
         NSUInteger newLength = [textView.text length] + [text length] - range.length;
         self.charCounter.text = [NSString stringWithFormat:@"%d", 140-newLength];
-        return (newLength >= 140) ? NO : YES;
+        return (newLength > 140) ? NO : YES;
     }
     // For any other character return TRUE so that the text gets added to the view
     return TRUE;
