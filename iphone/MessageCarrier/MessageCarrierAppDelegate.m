@@ -20,6 +20,8 @@
 
 @synthesize viewController=_viewController;
 
+@synthesize reach;
+
 #pragma mark -
 
 static MessageCarrierAppDelegate *sharedMessageCarrierAppDelegate = nil;

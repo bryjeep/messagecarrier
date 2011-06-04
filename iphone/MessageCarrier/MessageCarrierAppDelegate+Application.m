@@ -10,7 +10,6 @@
 #import "MessageCarrierAppDelegate.h"
 #import "MessageCarrierAppDelegate+Application.h"
 #import "Reachability.h"
-#import "ReachabilityAppDelegate.h"
 
 @implementation MessageCarrierAppDelegate ( Application )
 

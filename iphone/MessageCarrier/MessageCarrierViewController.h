@@ -55,4 +55,7 @@
 - (IBAction)SendMessageClicked:(id)sender;
 - (IBAction)MessageTypeChanged:(id)sender;
 - (void)setConnectionCount:(NSUInteger) cnt;
+
+- (void) messageDelivery;
+
 @end

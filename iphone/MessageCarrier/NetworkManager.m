@@ -10,7 +10,7 @@
 
 #import "NetworkManager.h"
 #import "MessageCarrierAppDelegate+DataModel.h"
-
+#import "MessageCarrierAppDelegate+Utility.h"
 @interface NetworkManager ()
 
 @property (nonatomic, retain) GKSession *currentSession;
@@ -81,20 +81,23 @@
 #pragma mark - Send And Receive
 
 - (NSError *) sendMessage: (OutOfBandMessage *) message {
-    return [self sendMessage: message asAccepted: NO];
-}
-
-- (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted {
     NSError *error = nil;
     
     NSString *dataString = [[message dictionaryRepresentation] JSONRepresentation];
     
     NSLog(@"Sending %@",dataString);
     
-    if (self.currentSession.available) {  
-        [self.currentSession sendDataToAllPeers: [dataString dataUsingEncoding: NSUTF8StringEncoding]
-                                   withDataMode: GKSendDataReliable
-                                          error: &error];        
+    if ([[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate].reach currentReachabilityStatus] == NotReachable)
+    {
+        NSLog(@"Sending Out Of Band");
+        if (self.currentSession.available) {  
+            [self.currentSession sendDataToAllPeers: [dataString dataUsingEncoding: NSUTF8StringEncoding]
+                                       withDataMode: GKSendDataReliable
+                                              error: &error];        
+        }
+    }else{
+        NSLog(@"Sending To Server");
+        [MessageCarrierAppDelegate serverSendMessage:message];
     }
     
     return error;
@@ -162,6 +165,23 @@
     }
 }
 
+- (void) sendMessageToNewClient {
+    NSLog(@"Sending Messages To New Client");
+    NSManagedObjectContext *context = [MessageCarrierAppDelegate sharedMessageCarrierAppDelegate].managedObjectContext;
+    NSFetchRequest *request = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createFetchRequestForMessage];
+    
+    NSError *err;
+    NSPredicate *toDeliver = [NSPredicate
+                              predicateWithFormat:@"(Status == %@) AND (MessageAttempts < 20)",
+                              [NSNumber numberWithInt:UNSENT]];
+    [request setPredicate:toDeliver];
+    NSArray *results = [context executeFetchRequest:request error:&err];
+    
+    for(OutOfBandMessage* message in results)
+    {
+        [self sendMessage:message];
+    }
+}
 
 #pragma mark - GKSessionDelegate Methods
 

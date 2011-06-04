@@ -21,7 +21,6 @@
 - (void) networkManagerDiscoveredPeer: (NetworkManager *) networkManager;
 - (void) networkManagerConnectedPeer: (NetworkManager *) networkManager;
 - (void) networkManagerDisconnectedPeer: (NetworkManager *) networkManager;
-
 @end
 
 @interface NetworkManager : NSObject <GKSessionDelegate> {
@@ -33,7 +32,6 @@
 - (BOOL) startup;
 - (void) shutdown;
 - (NSError *) sendMessage: (OutOfBandMessage *) message;
-- (NSError *) sendMessage: (OutOfBandMessage *) message asAccepted: (BOOL) accepted;
 - (int) currentPeerCount;
 
 @end

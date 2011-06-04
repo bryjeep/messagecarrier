@@ -184,6 +184,27 @@
     [self setConnectionCount:[nm currentPeerCount]];
     NSLog(@"removedPeer");
 }
+- (void) messageDelivery{
+    NSLog(@"messageDelivery");
+    
+    NSError *err;
+    NSManagedObjectContext *context = [MessageCarrierAppDelegate sharedMessageCarrierAppDelegate].managedObjectContext;
+    NSFetchRequest *request = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate]createFetchRequestForMessage];
+    NSPredicate *deliveredPredicate = [NSPredicate
+                                       predicateWithFormat:@"(Status == %@)",
+                                       [NSNumber numberWithInt:SENT]];
+    [request setPredicate:deliveredPredicate];
+    NSUInteger count = [context countForFetchRequest:request error:&err];
+    if(count == NSNotFound) {
+        //Handle error
+        deliveredNbr = 0;
+    } else {
+        deliveredNbr = count;
+    }
+    self.deliveredCnt.text = [[NSNumber numberWithInt:deliveredNbr] stringValue];
+    
+    [request release];
+}
 
 - (void)setConnectionCount:(NSUInteger) cnt{ 
     self.connectionLabel.text = [NSString stringWithFormat:@"%d Nearby Message Carrier%@", cnt, cnt != 1 ? @"s" : @""];
@@ -229,6 +250,10 @@
     NSManagedObjectContext* managedObjectContext = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext];
 	NSError *error = nil;
 	
+    if (!self.message) {
+        self.message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
+    }
+    
     self.message.Status         = [NSNumber numberWithInt: UNSENT];
 
     self.message.SourceID       = [[UIDevice currentDevice] uniqueIdentifier];
@@ -245,7 +270,8 @@
 	if ([managedObjectContext save: &error]){
         [self.networkManager sendMessage:self.message];
         
-        self.message = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] createOutOfBoundMessage];
+        self.message = nil;
+        
         self.toField.text = @"";
         self.MessageField.text = @"";
         sentNbr++;
