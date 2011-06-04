@@ -151,6 +151,7 @@
 	
     return YES;
 }
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
     self.charCounter.hidden = TRUE;
 }
@@ -170,6 +171,7 @@
         self.charCounter.hidden = FALSE;
         NSUInteger newLength = [textView.text length] + [text length] - range.length;
         self.charCounter.text = [NSString stringWithFormat:@"%d", 140-newLength];
+        
         return (newLength > 140) ? NO : YES;
     }
     // For any other character return TRUE so that the text gets added to the view
@@ -262,6 +264,17 @@
 
 - (IBAction)SendMessageClicked:(id)sender
 {	
+    if ([self.MessageField.text length] == 0 || ([self.toField.text length]==0 && self.messageType.selectedSegmentIndex != 2)) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Invalid Message"
+                                   message: @"Please provide a valid message and destination"
+                                  delegate: self
+                         cancelButtonTitle: @"OK"
+                         otherButtonTitles: nil];
+        [alert show];
+        [alert release];
+        return;   
+    }
+    
     NSManagedObjectContext* managedObjectContext = [[MessageCarrierAppDelegate sharedMessageCarrierAppDelegate] managedObjectContext];
 	NSError *error = nil;
 	
