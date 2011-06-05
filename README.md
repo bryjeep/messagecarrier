@@ -5,6 +5,7 @@ MessageCarrier was the winning project for the 2011 Random Hacks of Kindess hack
 ## The Team:
 - Server Magic: Brad Beglin & Michael Ivey
 - Mobile Team: Blake Byrnes, Joey Gibson & Bryan Davidson
+- Infra: Stephen Reid
 
 ## Platforms
 - Android (wishlist)
