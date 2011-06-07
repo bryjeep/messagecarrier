@@ -10,10 +10,9 @@ require 'yajl'
 require 'net/smtp'
 require 'twitter'
 
-API_VERSION = '2010-04-01'
-ACCOUNT_SID = ''
-ACCOUNT_TOKEN = ''
-CALLER_ID = ''
+TWILIO_API_V = '2010-04-01'
+
+keys = MessageCarrierSecretKeys.new()
 
 Twitter.configure do |config|
   config.consumer_key = ''
@@ -71,13 +70,13 @@ helpers do
   
   def send_sms(msg)
     t = {
-      'From' => CALLER_ID,
+      'From' => keys.TWILIO_CALLER_ID,
       'To' => msg['destination'],			
       'Body' => format_text(msg)
     }
     begin
-      account = Twilio::RestAccount.new(ACCOUNT_SID, ACCOUNT_TOKEN)
-      resp = account.request("/#{API_VERSION}/Accounts/#{ACCOUNT_SID}/SMS/Messages",
+      account = Twilio::RestAccount.new(keys.TWILIO_SID, keys.TWILIO_TOKEN)
+      resp = account.request("/#{TWILIO_API_V}/Accounts/#{keys.TWILIO_SID}/SMS/Messages",
                              'POST',
                              t)
     ensure
