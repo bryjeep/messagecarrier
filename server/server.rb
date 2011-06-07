@@ -15,10 +15,10 @@ TWILIO_API_V = '2010-04-01'
 keys = MessageCarrierSecretKeys.new()
 
 Twitter.configure do |config|
-  config.consumer_key = ''
-  config.consumer_secret = ''
-  config.oauth_token = ''
-  config.oauth_token_secret = ''
+  config.consumer_key = keys.TWITTER_CONSUMER_KEY
+  config.consumer_secret = keys.TWITTER_CONSUMER_SECRET
+  config.oauth_token = keys.TWITTER_OATH_TOKEN
+  config.oauth_token_secret = keys.TWITTER_OATH_TOKEN_SECRET
 end
 
 
@@ -76,9 +76,10 @@ helpers do
     }
     begin
       account = Twilio::RestAccount.new(keys.TWILIO_SID, keys.TWILIO_TOKEN)
-      resp = account.request("/#{TWILIO_API_V}/Accounts/#{keys.TWILIO_SID}/SMS/Messages",
-                             'POST',
-                             t)
+      resp = 
+		account.request("/#{TWILIO_API_V}/Accounts/#{keys.TWILIO_SID}/SMS/Messages",
+        'POST',
+        t)
     ensure
       puts "Twilio Response: " + resp.body
     end
@@ -88,13 +89,8 @@ helpers do
   end
 
   def send_email(msg)
-    from = 'messagecarrier@lavabit.com'
+    from = keys.EMAIL_USER + '@' + keys.EMAIL_HOSTDOMAIN
     to = msg['destination']
-    smtp_host   = 'lavabit.com'
-    smtp_port   = 25
-    smtp_domain = 'lavabit.com'
-    smtp_user   = ''
-    smtp_pwd    = ''
     
     subject = "[MessageCarrier] Emergency Message"
     time = Time.now
@@ -115,15 +111,17 @@ area experiencing a communications emergency:
 Please don't reply to this email, it will not be delivered.
 END_OF_MESSAGE
 
-    Net::SMTP.start(smtp_host, smtp_port, smtp_domain, smtp_user, smtp_pwd, :plain) do |smtp|
+    Net::SMTP.start(keys.EMAIL_HOSTDOMAIN, keys.EMAIL_PORT, 
+		keys.EMAIL_HOSTDOMAIN, keys.EMAIL_USER, keys.EMAIL_PWD, 
+		:plain) do |smtp|
       smtp.send_message emailmsg, from, to
     end
   end
 
   def send_twitter(msg)
     latlong = msg['location'].split(',')
-    Twitter.update(msg['messagebody'], {"lat" => latlong[0], "long" => latlong[1], "display_coordinates" => "true"})
-    #Twitter.update(format_text(msg))
+    Twitter.update(msg['messagebody'], {"lat" => latlong[0], 
+		"long" => latlong[1], "display_coordinates" => "true"})
   end
 
 end
