@@ -13,13 +13,13 @@ require 'twitter'
 
 TWILIO_API_V = '2010-04-01'
 
-keys = MessageCarrierSecretKeys.new()
+$keys = MessageCarrierSecretKeys.new()
 
 Twitter.configure do |config|
-  config.consumer_key = keys.TWITTER_CONSUMER_KEY
-  config.consumer_secret = keys.TWITTER_CONSUMER_SECRET
-  config.oauth_token = keys.TWITTER_OATH_TOKEN
-  config.oauth_token_secret = keys.TWITTER_OATH_TOKEN_SECRET
+  config.consumer_key = $keys.TWITTER_CONSUMER_KEY
+  config.consumer_secret = $keys.TWITTER_CONSUMER_SECRET
+  config.oauth_token = $keys.TWITTER_OATH_TOKEN
+  config.oauth_token_secret = $keys.TWITTER_OATH_TOKEN_SECRET
 end
 
 
@@ -71,14 +71,14 @@ helpers do
   
   def send_sms(msg)
     t = {
-      'From' => keys.TWILIO_CALLER_ID,
+      'From' => $keys.TWILIO_CALLER_ID,
       'To' => msg['destination'],			
       'Body' => format_text(msg)
     }
     begin
-      account = Twilio::RestAccount.new(keys.TWILIO_SID, keys.TWILIO_TOKEN)
+      account = Twilio::RestAccount.new($keys.TWILIO_SID, $keys.TWILIO_TOKEN)
       resp = 
-		account.request("/#{TWILIO_API_V}/Accounts/#{keys.TWILIO_SID}/SMS/Messages",
+		account.request("/#{TWILIO_API_V}/Accounts/#{$keys.TWILIO_SID}/SMS/Messages",
         'POST',
         t)
     ensure
@@ -90,7 +90,7 @@ helpers do
   end
 
   def send_email(msg)
-    from = keys.EMAIL_USER + '@' + keys.EMAIL_HOSTDOMAIN
+    from = $keys.EMAIL_USER + '@' + $keys.EMAIL_HOSTDOMAIN
     to = msg['destination']
     
     subject = "[MessageCarrier] Emergency Message"
@@ -112,8 +112,8 @@ area experiencing a communications emergency:
 Please don't reply to this email, it will not be delivered.
 END_OF_MESSAGE
 
-    Net::SMTP.start(keys.EMAIL_HOSTDOMAIN, keys.EMAIL_PORT, 
-		keys.EMAIL_HOSTDOMAIN, keys.EMAIL_USER, keys.EMAIL_PWD, 
+    Net::SMTP.start($keys.EMAIL_HOSTDOMAIN, $keys.EMAIL_PORT, 
+		$keys.EMAIL_HOSTDOMAIN, $keys.EMAIL_USER, $keys.EMAIL_PWD, 
 		:plain) do |smtp|
       smtp.send_message emailmsg, from, to
     end
