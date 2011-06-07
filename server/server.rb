@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require './database'
+require './MessageCarrierSecretKeys'
 
 require 'builder'
 require 'twiliolib'
