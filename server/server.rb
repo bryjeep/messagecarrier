@@ -95,7 +95,7 @@ helpers do
     
     subject = "[MessageCarrier] Emergency Message"
     time = Time.now
-    emaildate = time.strftime("%a, %d %b %Y %H:%M:%S -0400")
+    emaildate = time.strftime("%a, %d %b %Y %H:%M:%S GMT")
     
     #Compose the message for the email
     emailmsg = <<END_OF_MESSAGE
